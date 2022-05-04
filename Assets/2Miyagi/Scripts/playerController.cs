@@ -7,9 +7,9 @@ public class playerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 moveDirection = Vector3.zero;
 
-    public float mainSpeed = 3.0f;
-    public float mainJampSpeed = 8.0f;
-    public float gravity = 20.0f;
+    public float _mainSpeed = 3.0f;
+    public float _mainJampSpeed = 8.0f;
+    public float _gravity = 20.0f;
     void Start(){
         controller = GetComponent<CharacterController>();
     }
@@ -19,13 +19,13 @@ public class playerController : MonoBehaviour
         {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection = moveDirection * mainSpeed;
+            moveDirection = moveDirection * _mainSpeed;
             if (Input.GetButton("Jump"))
             {
-                moveDirection.y = mainJampSpeed;
+                moveDirection.y = _mainJampSpeed;
             }
         }
-        moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
+        moveDirection.y = moveDirection.y - (_gravity * Time.deltaTime);
         controller.Move(moveDirection * Time.deltaTime);
     }
 }
