@@ -11,11 +11,19 @@ public class playerCamera : MonoBehaviour
     public float _ySence;
     public float _limitXAxizAngle = 30;
     private Vector3 _mXAxiz;
-    void Start()
-    {
+
+    private bool _lightPower;
+    public GameObject _flashLight;
+
+    GameObject gameManagerObj;
+    GameManager gameManager;
+    void Start(){
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _mXAxiz = _xAxis.localEulerAngles;
+
+        gameManagerObj = GameObject.Find("GameManager");
+        gameManager = gameManagerObj.GetComponent<GameManager>();
     }
     private void CameraFPS()
     {
@@ -36,8 +44,18 @@ public class playerCamera : MonoBehaviour
             _lightCamera.localEulerAngles = _mXAxiz;
         }
     }
-    void Update()
-    {
+    void Update(){
         CameraFPS();
+        if (_lightPower == true && Input.GetKey(KeyCode.Mouse1)) {
+            
+            _flashLight.SetActive(false);
+            _lightPower = false;
+            gameManager.CallInoperrable(0.2f);
+        } else if (_lightPower == false && Input.GetKey(KeyCode.Mouse1)){
+            
+            _flashLight.SetActive(true);
+            _lightPower = true;
+            gameManager.CallInoperrable(0.2f);
+        }
     }
 }
