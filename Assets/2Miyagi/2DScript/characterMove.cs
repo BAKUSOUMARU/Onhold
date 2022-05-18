@@ -5,6 +5,7 @@ using UnityEngine;
 public class characterMove : MonoBehaviour
 {
     private Rigidbody2D rb;
+    GameObject _light;
 
     float _jumpForce = 400.0f;      //ƒWƒƒƒ“ƒvŽž‚É‰Á‚¦‚é—Í
     float _runSpeed = 5.0f;         //‘–‚Á‚Ä‚¢‚éŠÔ‚Ì‘¬“x
@@ -21,6 +22,13 @@ public class characterMove : MonoBehaviour
     private void Update()
     {
         Move();
+        if (Input.GetKey(KeyCode.Mouse1)){
+            if (_light.activeSelf){
+                _light.SetActive(false);
+            } else {
+                _light.SetActive(true);
+            }
+        }
     }
 
     private void Move()
@@ -69,6 +77,12 @@ public class characterMove : MonoBehaviour
         {
             if (!isGround)
                 isGround = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col){
+        if(col.gameObject.tag == "Enemy"){
+            Destroy(col.gameObject);
         }
     }
 }
