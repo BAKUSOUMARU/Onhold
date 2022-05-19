@@ -7,8 +7,8 @@ public class characterMove : MonoBehaviour
     private Rigidbody2D rb;
     GameObject _light;
 
-    float _jumpForce = 400.0f;      //ジャンプ時に加える力
-    float _runSpeed = 5.0f;         //走っている間の速度
+    [SerializeField]float _jumpForce = 2000.0f;      //ジャンプ時に加える力
+    [SerializeField]float _runSpeed = 5.0f;         //走っている間の速度
     
     bool isGround = true;           //地面と設置しているか管理するフラグ 
 
