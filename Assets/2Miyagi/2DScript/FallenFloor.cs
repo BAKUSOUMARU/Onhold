@@ -16,8 +16,8 @@ public class FallenFloor : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             fall = true;   
-        } else if (col.gameObject.tag =="Ground"){
-            //Destroy(gameObject);
+        } else if (col.gameObject.tag =="DropGround"){
+            Destroy(gameObject);
         }
     }
 

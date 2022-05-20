@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 1119156243}
   m_Layer: 0
   m_Name: Ground (1)
-  m_TagString: Ground
+  m_TagString: DropGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 1930605403}
   m_Layer: 0
   m_Name: FallFloor
-  m_TagString: Ground
+  m_TagString: DropGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
