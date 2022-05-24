@@ -65,7 +65,7 @@ public class characterMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Ground")
+        if(col.gameObject.tag == "Ground" || col.gameObject.tag == "DropGround")
         {
             if (!isGround)
                 isGround = true;
