@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoalFinished : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GoalFinished : MonoBehaviour
     {
         if(col.gameObject.tag == "Player"){
             Debug.Log("finish");
+            SceneManager.LoadScene("ResultScene");
         }
     }
 }
