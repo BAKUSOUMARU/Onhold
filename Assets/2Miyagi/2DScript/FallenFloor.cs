@@ -6,6 +6,7 @@ public class FallenFloor : MonoBehaviour
 {
     bool fall;
     Rigidbody2D rb;
+    public bool fall_true;
     private void Start()
     {
         fall = false;
@@ -16,8 +17,6 @@ public class FallenFloor : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             fall = true;   
-        } else if (col.gameObject.tag =="DropGround"){
-            Destroy(gameObject);
         }
     }
 
@@ -25,8 +24,31 @@ public class FallenFloor : MonoBehaviour
     {
         if(fall == true)
         {
-            //transform.Translate(0, -0.1f, 0);
-            rb.velocity = new Vector2(0,-10);
+            Coroutine coroutine = StartCoroutine("DelayMethod",0.5f);
         }
+    }
+
+    private IEnumerator DelayMethod(float delayFrameCount)
+    {
+        yield return new WaitForSecondsRealtime(delayFrameCount);
+
+        if(fall_true == true)
+        {
+            Fallen();
+        }
+        else
+        {
+            Break();
+        }
+        
+    }
+    public void Fallen()
+    {
+        rb.velocity = new Vector2(0,-10);
+        Destroy(gameObject, 0.5f);
+    }
+    public void Break()
+    {
+        Destroy(gameObject,0.5f);
     }
 }
