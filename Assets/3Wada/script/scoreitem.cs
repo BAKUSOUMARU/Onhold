@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class scoreitem : MonoBehaviour
 {
+    public int _plusScore = 1;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
-            GameManager.instance._score++;
+            GameManager.instance._score+=_plusScore;
+            Debug.LogError(GameManager.instance._score);
         }
     }
 }

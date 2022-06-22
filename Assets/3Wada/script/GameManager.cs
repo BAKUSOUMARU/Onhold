@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public int _score;
 
+    public int _hammer;
 
     public static GameManager instance;
 
