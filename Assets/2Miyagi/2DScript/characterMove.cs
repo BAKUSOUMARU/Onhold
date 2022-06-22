@@ -80,7 +80,12 @@ public class characterMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D col){
+    /*private void OnCollisionEnter2D(Collision2D col){
+        
+    }*/
+
+    private void OnTriggerEnter(Collider col)
+    {
         if(col.gameObject.tag == "Enemy"){
             Destroy(col.gameObject);
         }
