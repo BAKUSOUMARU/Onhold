@@ -6,6 +6,7 @@ public class Poisontrap : MonoBehaviour
 {
     [SerializeField] GameObject _poisontrap;
     [SerializeField] float _addScale = 0.01f;
+    [SerializeField] int _startTrap = 1;
     float _scalesize = 1;
     Transform _tr;
     // Start is called before the first frame update
@@ -17,7 +18,10 @@ public class Poisontrap : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        PoisonMove();    
+        if (GameManager.instance._hammer > _startTrap - 1) 
+        {  
+            PoisonMove();    
+        }
     }
     
     public void PoisonMove()
