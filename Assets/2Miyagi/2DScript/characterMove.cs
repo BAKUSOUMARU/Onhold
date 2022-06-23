@@ -10,7 +10,8 @@ public class characterMove : MonoBehaviour
     [SerializeField]float _jumpForce = 2000.0f;      //ジャンプ時に加える力
     [SerializeField]float _runSpeed = 5.0f;         //走っている間の速度
     
-    bool isGround = true;           //地面と設置しているか管理するフラグ 
+    bool isGround = true;           //地面と設置しているか管理するフラグ
+    bool isWall = false;             //
 
     //string state;                 //プレイヤーの状態管理　//ここらへんは使わなかったら消してください.アニメーションなど用
     //string prevState;             //前の状態を保存        //使用例:https://xr-hub.com/archives/8808
@@ -29,6 +30,8 @@ public class characterMove : MonoBehaviour
                 _light.SetActive(true);
             }
         }
+
+
     }
 
     private void Move()
@@ -54,10 +57,25 @@ public class characterMove : MonoBehaviour
 
 
         if (isGround){
-            if (Input.GetKeyDown(KeyCode.Space)){
-                this.rb.AddForce(transform.up * this._jumpForce);
-                isGround = false;
+            if (isWall)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    rb.AddForce(new Vector2(-rb.velocity.x, 2) * 400);
+                    isGround = false;
+                    isWall = false;
+                }
             }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    this.rb.AddForce(transform.up * this._jumpForce);
+                    isGround = false;
+                    isWall = false;
+                }
+            }
+            
         }
 
         
@@ -77,6 +95,17 @@ public class characterMove : MonoBehaviour
         {
             if (!isGround)
                 isGround = true;
+        }
+        if(col.gameObject.tag == "Wall")
+        {
+            if (!isGround && !isWall)
+                isGround = true;
+                isWall = true;
+        }
+        else
+        {
+            if (isWall)
+                isWall = false;
         }
     }
 
