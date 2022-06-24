@@ -94,6 +94,10 @@ public class characterMove : MonoBehaviour
     }
         private void OnTriggerEnter2D(Collider2D col)
     {
+        if(col.gameObject.tag == "Enemy"){
+            Destroy(col.gameObject);
+        }
+
         if(col.gameObject.tag == "Ground" || col.gameObject.tag == "DropGround")
         {
             if (!isGround)
@@ -117,17 +121,6 @@ public class characterMove : MonoBehaviour
         {
             if (isWall)
                 isWall = false;
-        }
-    }
-
-    /*private void OnCollisionEnter2D(Collision2D col){
-        
-    }*/
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if(col.gameObject.tag == "Enemy"){
-            Destroy(col.gameObject);
         }
     }
 }
