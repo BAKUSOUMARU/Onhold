@@ -1576,7 +1576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3257461619263105377, guid: f9a6b5db4ba5d124c93164cf6adcb60a, type: 3}
       propertyPath: _addScale
-      value: -0.1
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: 3257461619263105378, guid: f9a6b5db4ba5d124c93164cf6adcb60a, type: 3}
       propertyPath: m_RootOrder
