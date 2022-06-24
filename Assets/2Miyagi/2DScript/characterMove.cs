@@ -61,7 +61,7 @@ public class characterMove : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    rb.AddForce(new Vector2(-rb.velocity.x, 2) * 400);
+                    rb.AddForce(new Vector2(-rb.velocity.x, 2) * 800);
                     isGround = false;
                     isWall = false;
                 }
