@@ -10,7 +10,9 @@ public class characterMove : MonoBehaviour
     [SerializeField]float _jumpForce = 2000.0f;      //ジャンプ時に加える力
     [SerializeField]float _runSpeed = 5.0f;         //走っている間の速度
     
-    bool isGround = true;           //地面と設置しているか管理するフラグ 
+    bool isGround = true;           //地面と設置しているか管理するフラグ
+    bool isWall = false;             //
+    bool wallJump = false;
 
     //string state;                 //プレイヤーの状態管理　//ここらへんは使わなかったら消してください.アニメーションなど用
     //string prevState;             //前の状態を保存        //使用例:https://xr-hub.com/archives/8808
@@ -29,41 +31,68 @@ public class characterMove : MonoBehaviour
                 _light.SetActive(true);
             }
         }
+
+
     }
 
     private void Move()
     {
 
         float horizontalKey = Input.GetAxis("Horizontal");
-
-        //右入力で左向きに動く
-        if (horizontalKey > 0)
+        if (!wallJump)
         {
-            rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
+            //右入力で左向きに動く
+            if (horizontalKey > 0)
+            {
+                rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
+            }
+            //左入力で左向きに動く
+            else if (horizontalKey < 0)
+            {
+                rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
+            }
+            //ボタンを話すと止まる
+            else
+            {
+                rb.velocity = new Vector2(0,rb.velocity.y);
+            }
         }
-        //左入力で左向きに動く
-        else if (horizontalKey < 0)
-        {
-            rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
-        }
-        //ボタンを話すと止まる
-        else
-        {
-            rb.velocity = new Vector2(0,rb.velocity.y);
-        }
+        
 
 
         if (isGround){
-            if (Input.GetKeyDown(KeyCode.Space)){
-                this.rb.AddForce(transform.up * this._jumpForce);
-                isGround = false;
+            if (isWall)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    rb.AddForce(new Vector2(-rb.velocity.x, 6f) * 170);
+                    isGround = false;
+                    isWall = false;
+                    wallJump = true;
+                    Coroutine coroutine = StartCoroutine("DelayMethod", 0.2f);
+                }
             }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    this.rb.AddForce(transform.up * this._jumpForce);
+                    isGround = false;
+                    isWall = false;
+                }
+            }
+            
         }
 
         
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private IEnumerator DelayMethod(float delayFrameCount)
+    {
+        yield return new WaitForSecondsRealtime(delayFrameCount);
+        wallJump = false;
+    }
+        private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "Ground" || col.gameObject.tag == "DropGround")
         {
@@ -77,6 +106,17 @@ public class characterMove : MonoBehaviour
         {
             if (!isGround)
                 isGround = true;
+        }
+        if(col.gameObject.tag == "Wall")
+        {
+            if (!isGround && !isWall)
+                isGround = true;
+                isWall = true;
+        }
+        else
+        {
+            if (isWall)
+                isWall = false;
         }
     }
 

@@ -6,6 +6,8 @@ public class FallenFloor : MonoBehaviour
 {
     bool fall;
     Rigidbody2D rb;
+
+    [Header("True‚Å‚ ‚ê‚Î—‚¿‚é°Afalse‚Å‚ ‚ê‚Î•ö‚ê‚é°")]
     public bool fall_true;
     private void Start()
     {
