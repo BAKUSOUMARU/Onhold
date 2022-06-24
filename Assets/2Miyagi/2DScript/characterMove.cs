@@ -12,6 +12,7 @@ public class characterMove : MonoBehaviour
     
     bool isGround = true;           //地面と設置しているか管理するフラグ
     bool isWall = false;             //
+    bool wallJump = false;
 
     //string state;                 //プレイヤーの状態管理　//ここらへんは使わなかったら消してください.アニメーションなど用
     //string prevState;             //前の状態を保存        //使用例:https://xr-hub.com/archives/8808
@@ -38,22 +39,25 @@ public class characterMove : MonoBehaviour
     {
 
         float horizontalKey = Input.GetAxis("Horizontal");
-
-        //右入力で左向きに動く
-        if (horizontalKey > 0)
+        if (!wallJump)
         {
-            rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
+            //右入力で左向きに動く
+            if (horizontalKey > 0)
+            {
+                rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
+            }
+            //左入力で左向きに動く
+            else if (horizontalKey < 0)
+            {
+                rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
+            }
+            //ボタンを話すと止まる
+            else
+            {
+                rb.velocity = new Vector2(0,rb.velocity.y);
+            }
         }
-        //左入力で左向きに動く
-        else if (horizontalKey < 0)
-        {
-            rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
-        }
-        //ボタンを話すと止まる
-        else
-        {
-            rb.velocity = new Vector2(0,rb.velocity.y);
-        }
+        
 
 
         if (isGround){
@@ -61,9 +65,11 @@ public class characterMove : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    rb.AddForce(new Vector2(-rb.velocity.x, 2) * 400);
+                    rb.AddForce(new Vector2(-rb.velocity.x, 6f) * 170);
                     isGround = false;
                     isWall = false;
+                    wallJump = true;
+                    Coroutine coroutine = StartCoroutine("DelayMethod", 0.2f);
                 }
             }
             else
@@ -81,7 +87,12 @@ public class characterMove : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private IEnumerator DelayMethod(float delayFrameCount)
+    {
+        yield return new WaitForSecondsRealtime(delayFrameCount);
+        wallJump = false;
+    }
+        private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "Ground" || col.gameObject.tag == "DropGround")
         {
