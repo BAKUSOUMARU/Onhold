@@ -26,7 +26,7 @@ public class Poisontrap : MonoBehaviour
     
     public void PoisonMove()
     {
-        this.transform.localScale =new Vector3(_scalesize, 1, 1);
+        this.transform.localScale =new Vector3(_scalesize, 6, 1);
         _scalesize += _addScale;
     }
 }
