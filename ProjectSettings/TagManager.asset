@@ -7,6 +7,7 @@ TagManager:
   - Undefined
   - DropGround
   - Ground
+  - Wall
   layers:
   - Default
   - TransparentFX
