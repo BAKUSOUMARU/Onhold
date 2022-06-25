@@ -9,6 +9,8 @@ public class characterMove : MonoBehaviour
 
     [SerializeField]float _jumpForce = 2000.0f;      //ジャンプ時に加える力
     [SerializeField]float _runSpeed = 5.0f;         //走っている間の速度
+
+    float horizontalKey;
     
     bool isGround = true;           //地面と設置しているか管理するフラグ
     bool isWall = false;             //
@@ -38,7 +40,7 @@ public class characterMove : MonoBehaviour
     private void Move()
     {
 
-        float horizontalKey = Input.GetAxis("Horizontal");
+        horizontalKey = Input.GetAxis("Horizontal");
         if (!wallJump)
         {
             //右入力で左向きに動く
@@ -65,7 +67,7 @@ public class characterMove : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    rb.AddForce(new Vector2(-horizontalKey * 8, 10f) * 125);
+                    rb.AddForce(new Vector2(-rb.velocity.x, 10f) * 125);
                     isGround = false;
                     isWall = false;
                     wallJump = true;
@@ -111,10 +113,15 @@ public class characterMove : MonoBehaviour
         }
         if(col.gameObject.tag == "Wall")
         {
-            if (!isGround && !isWall)
-                isGround = true;
-                isWall = true;
-            rb.velocity = new Vector2(0, 1);
+            if (horizontalKey > 0 || horizontalKey < 0)
+            {
+                if (!isGround && !isWall)
+                {
+                    isGround = true;
+                    isWall = true;
+                }
+                rb.velocity = new Vector2(0, 1);
+            }
         }
         else
         {
