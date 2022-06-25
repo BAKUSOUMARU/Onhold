@@ -65,11 +65,11 @@ public class characterMove : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    rb.AddForce(new Vector2(-rb.velocity.x, 6f) * 170);
+                    rb.AddForce(new Vector2(-horizontalKey * 8, 10f) * 125);
                     isGround = false;
                     isWall = false;
                     wallJump = true;
-                    Coroutine coroutine = StartCoroutine("DelayMethod", 0.2f);
+                    Coroutine coroutine = StartCoroutine("DelayMethod", 0.3f);
                 }
             }
             else
@@ -80,11 +80,8 @@ public class characterMove : MonoBehaviour
                     isGround = false;
                     isWall = false;
                 }
-            }
-            
+            }   
         }
-
-        
     }
 
     private IEnumerator DelayMethod(float delayFrameCount)
@@ -96,6 +93,7 @@ public class characterMove : MonoBehaviour
     {
         if(col.gameObject.tag == "Enemy"){
             Destroy(col.gameObject);
+            this.rb.AddForce(transform.up * this._jumpForce);
         }
 
         if(col.gameObject.tag == "Ground" || col.gameObject.tag == "DropGround")
@@ -116,10 +114,10 @@ public class characterMove : MonoBehaviour
             if (!isGround && !isWall)
                 isGround = true;
                 isWall = true;
+            rb.velocity = new Vector2(0, 1);
         }
         else
         {
-            if (isWall)
                 isWall = false;
         }
     }

@@ -11,7 +11,7 @@ public class scoreitem : MonoBehaviour
         {
             Destroy(this.gameObject);
             GameManager.instance._score+=_plusScore;
-            Debug.LogError(GameManager.instance._score);
+            Debug.Log(GameManager.instance._score);
         }
     }
 }
