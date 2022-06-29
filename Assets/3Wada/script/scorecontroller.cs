@@ -14,6 +14,6 @@ public class scorecontroller : MonoBehaviour
 
     void ResultScore()
     {
-        _scoreText.text = "Score :" + GameManager.instance._score.ToString();   
+        _scoreText.text = "Šl“¾‚µ‚½•óÎ‚Ì”:" + GameManager.instance._score.ToString();   
     }
 }
