@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1dc512cc9e56f438629a2324ec73eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _loadSceneName: ResultScene
 --- !u!1 &8629696536790489462
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1dc512cc9e56f438629a2324ec73eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _loadSceneName: ResultScene
 --- !u!1 &8629696537289980294
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +267,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.3333333, y: 2.3333333}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
