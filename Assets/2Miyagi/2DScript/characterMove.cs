@@ -19,7 +19,10 @@ public class characterMove : MonoBehaviour
     //string state;                 //プレイヤーの状態管理　//ここらへんは使わなかったら消してください.アニメーションなど用
     //string prevState;             //前の状態を保存        //使用例:https://xr-hub.com/archives/8808
     //float _stateEffect = 1;          //状況に応じて横移動速度を変えるための係数
-    void Start(){
+    void Start()
+    {
+        GameManager.instance._hammer = 0;
+        GameManager.instance._score = 0;
         this.rb = GetComponent<Rigidbody2D>();
     }
 
