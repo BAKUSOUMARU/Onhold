@@ -1,13 +1,10 @@
 name: Build
 
 on:
-  pull_request: {}
-  paths-ignore:
-      - '**.md'
-  push: { branches: [Master] }
-  paths-ignore:
-      - '**.md'
+  pull_request: {branches: [Master]}
 
+  push: { branches: [Master] }
+  
 jobs:
   build:
     name: ${{ matrix.targetPlatform }}
