@@ -1,8 +1,12 @@
 name: Build
 
 on:
-  pull_request: {}
+  pull_request: {branches: [Master]}
+  paths-ignore:
+      - '**.md'
   push: { branches: [Master] }
+  paths-ignore:
+      - '**.md'
 
 jobs:
   build:
