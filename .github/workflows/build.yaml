@@ -1,7 +1,7 @@
 name: Build
 
 on:
-  pull_request: {branches: [Master]}
+  pull_request: {}
   paths-ignore:
       - '**.md'
   push: { branches: [Master] }
