@@ -9,6 +9,7 @@ public class characterMove : MonoBehaviour
 
     [SerializeField]float _jumpForce = 2000.0f;      //ジャンプ時に加える力
     [SerializeField]float _runSpeed = 5.0f;         //走っている間の速度
+    [SerializeField] float _wallJumpCoolTime = 0.4f; //壁ジャンのクールタイム
 
     float horizontalKey;
     
@@ -62,31 +63,31 @@ public class characterMove : MonoBehaviour
                 rb.velocity = new Vector2(0,rb.velocity.y);
             }
         }
-        
 
 
-        if (isGround){
+
+        if (isGround)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                this.rb.AddForce(transform.up * this._jumpForce);
+                isGround = false;
+            }
+        }
+        else if (!isGround)
+        {
             if (isWall)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     rb.AddForce(new Vector2(-rb.velocity.x, 10f) * 125);
-                    isGround = false;
                     isWall = false;
                     wallJump = true;
-                    Coroutine coroutine = StartCoroutine("DelayMethod", 0.3f);
+                    Coroutine coroutine = StartCoroutine("DelayMethod", _wallJumpCoolTime);
                 }
             }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    this.rb.AddForce(transform.up * this._jumpForce);
-                    isGround = false;
-                    isWall = false;
-                }
-            }   
         }
+
     }
 
     private IEnumerator DelayMethod(float delayFrameCount)
@@ -118,17 +119,24 @@ public class characterMove : MonoBehaviour
         {
             if (horizontalKey > 0 || horizontalKey < 0)
             {
-                if (!isGround && !isWall)
+                if (!isWall)
                 {
-                    isGround = true;
                     isWall = true;
                 }
-                rb.velocity = new Vector2(0, 1);
+                rb.velocity = new Vector2(0, 0.5f);
             }
         }
-        else
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if(col.gameObject.tag == "Wall")
         {
-                isWall = false;
+            if (isWall) { isWall = false; }
+        }
+        if(col.gameObject.tag == "Ground")
+        {
+            if(isGround) { isGround = false; }
         }
     }
 }
