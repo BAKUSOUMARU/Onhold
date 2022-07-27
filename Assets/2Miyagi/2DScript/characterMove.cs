@@ -7,9 +7,14 @@ public class characterMove : MonoBehaviour
     private Rigidbody2D rb;
     GameObject _light;
 
-    [SerializeField]float _jumpForce = 2000.0f;      //ジャンプ時に加える力
-    [SerializeField]float _runSpeed = 5.0f;         //走っている間の速度
-    [SerializeField] float _wallJumpCoolTime = 0.4f; //壁ジャンのクールタイム
+    [SerializeField]
+    float _jumpForce = 1400.0f;      //ジャンプ時に加える力
+
+    [SerializeField]
+    float _runSpeed = 8.0f;         //走っている間の速度
+
+    [SerializeField]
+    float _wallJumpCoolTime = 0.3f; //壁ジャンのクールタイム
 
     float horizontalKey;
     
@@ -37,13 +42,10 @@ public class characterMove : MonoBehaviour
                 _light.SetActive(true);
             }
         }
-
-
     }
 
     private void Move()
     {
-
         horizontalKey = Input.GetAxis("Horizontal");
         if (!wallJump)
         {
@@ -63,8 +65,6 @@ public class characterMove : MonoBehaviour
                 rb.velocity = new Vector2(0,rb.velocity.y);
             }
         }
-
-
 
         if (isGround)
         {
@@ -87,13 +87,13 @@ public class characterMove : MonoBehaviour
                 }
             }
         }
-
     }
 
     private IEnumerator DelayMethod(float delayFrameCount)
     {
         yield return new WaitForSecondsRealtime(delayFrameCount);
-        wallJump = false;
+        if(wallJump)wallJump = false;
+        
     }
         private void OnTriggerEnter2D(Collider2D col)
     {
@@ -101,7 +101,6 @@ public class characterMove : MonoBehaviour
             Destroy(col.gameObject);
             this.rb.AddForce(transform.up * this._jumpForce);
         }
-
         if(col.gameObject.tag == "Ground" || col.gameObject.tag == "DropGround")
         {
             if (!isGround)
@@ -126,6 +125,11 @@ public class characterMove : MonoBehaviour
                 rb.velocity = new Vector2(0, 0.5f);
             }
         }
+
+        if(col.gameObject.tag == "Water")
+        {
+            WaterGimmick();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -138,5 +142,14 @@ public class characterMove : MonoBehaviour
         {
             if(isGround) { isGround = false; }
         }
+    }
+
+    [SerializeField]
+    int _oxygenCount = 100;
+
+    void WaterGimmick()
+    {
+        _oxygenCount -= 1;
+        Coroutine coroutine = StartCoroutine("DelayMethod", 0.5f);
     }
 }
