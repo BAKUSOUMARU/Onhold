@@ -1,14 +1,18 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class characterMove : MonoBehaviour
+public class CharacterMove : MonoBehaviour
 {
     private Rigidbody2D rb;
     GameObject _light;
 
     [SerializeField]
     float _jumpForce = 1400.0f;      //ƒWƒƒƒ“ƒvŽž‚É‰Á‚¦‚é—Í
+
+    float _defaultJumpForce;
 
     [SerializeField]
     float _runSpeed = 8.0f;         //‘–‚Á‚Ä‚¢‚éŠÔ‚Ì‘¬“x
@@ -30,11 +34,14 @@ public class characterMove : MonoBehaviour
         GameManager.instance._hammer = 0;
         GameManager.instance._score = 0;
         this.rb = GetComponent<Rigidbody2D>();
+        _defaultJumpForce = _jumpForce;
     }
 
     private void Update()
     {
         Move();
+        WaterPlayer();
+
         if (Input.GetKey(KeyCode.Mouse1)){
             if (_light.activeSelf){
                 _light.SetActive(false);
@@ -106,6 +113,10 @@ public class characterMove : MonoBehaviour
             if (!isGround)
                 isGround = true;
         }
+        if(col.gameObject.tag == "Water")
+        {
+            _boolOxygun = true;
+        }
     }
     private void OnTriggerStay2D(Collider2D col)
     {
@@ -125,11 +136,6 @@ public class characterMove : MonoBehaviour
                 rb.velocity = new Vector2(0, 0.5f);
             }
         }
-
-        if(col.gameObject.tag == "Water")
-        {
-            WaterGimmick();
-        }
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -142,14 +148,54 @@ public class characterMove : MonoBehaviour
         {
             if(isGround) { isGround = false; }
         }
+        if(col.gameObject.tag == "Water")
+        {
+            _boolOxygun = false;
+        }
     }
 
     [SerializeField]
-    int _oxygenCount = 100;
+    float _oxygenCount = 100;
 
-    void WaterGimmick()
+    [SerializeField]
+    Text oxugenText;
+
+    bool _boolOxygun;
+
+    [SerializeField]
+    float _defaultGravityScale = 8; //Ž_‘fã‚Ìd—Í
+
+    [SerializeField]
+    float _anoxiaGravityScale; //–³Ž_‘fó‘Ô‚Ìd—Í
+
+    [SerializeField]
+    float _anoxiaJumpForce;
+    void WaterPlayer()
     {
-        _oxygenCount -= 1;
-        Coroutine coroutine = StartCoroutine("DelayMethod", 0.5f);
+        if (_boolOxygun)
+        {
+            if(_oxygenCount >= 0)
+            {
+                _oxygenCount -= 0.05f;
+                oxugenText.text = string.Format("{0:000}oxy",_oxygenCount);
+
+                rb.gravityScale = _anoxiaGravityScale;
+                _jumpForce = _anoxiaJumpForce;
+            }else if (_oxygenCount <= 0)
+            {
+                print("finish");
+            }
+        }
+        else if (!_boolOxygun)
+        {
+            if(_oxygenCount <= 100)
+            {
+                _oxygenCount += 0.05f;
+                oxugenText.text = string.Format("{0:000}oxy", _oxygenCount);
+
+                rb.gravityScale = _defaultGravityScale;
+                _jumpForce = _defaultJumpForce;
+            }
+        }
     }
 }
