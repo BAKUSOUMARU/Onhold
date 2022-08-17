@@ -6,7 +6,7 @@ public class Enemycontroller : MonoBehaviour
 {
     [SerializeField] float _speed = 5;
     Rigidbody2D _rd;
-    [SerializeField] MoveDir _movedir;
+    [SerializeField] bool isEnemyMoveleft;
 
     void Start()
     {
@@ -21,21 +21,29 @@ public class Enemycontroller : MonoBehaviour
 
     public void EnemyMove()
     {
-        switch (_movedir)
+        if (isEnemyMoveleft)
         {
-            case MoveDir.light:
-                _rd.velocity = Vector2.right * _speed;
-                break;
-            case MoveDir.left:
-                _rd.velocity = Vector2.left * _speed;
-                break;
-         }
+            _rd.velocity = Vector2.left * _speed;    
+        }
+        else
+        {
+            _rd.velocity = Vector2.right * _speed;
+        }
+         
     }
 
-    enum MoveDir
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        light,
-        left
+        if(collision.gameObject.tag == "Wall")
+        {
+            if (isEnemyMoveleft)
+            {
+                isEnemyMoveleft = false;
+            }
+            else if (!isEnemyMoveleft)
+            {
+                isEnemyMoveleft = true;
+            }
+        }
     }
-
 }

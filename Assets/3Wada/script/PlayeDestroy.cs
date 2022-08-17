@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayeDestroy : MonoBehaviour
 {
     [SerializeField] string _loadSceneName;
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
