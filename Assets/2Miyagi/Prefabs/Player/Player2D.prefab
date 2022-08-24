@@ -163,3 +163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpForce: 800
   _runSpeed: 5
+  _wallJumpCoolTime: 0.3
+  _oxygenCount: 100
+  oxugenText: {fileID: 0}
+  _defaultGravityScale: 8
+  _anoxiaGravityScale: 0
+  _anoxiaJumpForce: 0
