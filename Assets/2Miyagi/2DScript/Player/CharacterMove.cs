@@ -7,7 +7,10 @@ using UnityEngine.UI;
 public class CharacterMove : MonoBehaviour
 {
     private Rigidbody2D rb;
+
     GameObject _light;
+    bool _lightActive = false;
+    static public float _battery = 100;
 
     [SerializeField]
     float _jumpForce = 1400.0f;      //ƒWƒƒƒ“ƒvŽž‚É‰Á‚¦‚é—Í
@@ -37,16 +40,22 @@ public class CharacterMove : MonoBehaviour
         _defaultJumpForce = _jumpForce;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
         WaterPlayer();
 
-        if (Input.GetKey(KeyCode.Mouse1)){
-            if (_light.activeSelf){
-                _light.SetActive(false);
-            } else {
-                _light.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.Mouse1)){
+            if (_lightActive)
+            {
+                _lightActive = false;
+            }else if (!_lightActive)
+            {
+                _lightActive = true;
+                if(_battery <= 100)
+                {
+                    _battery -= 0.01f;
+                }
             }
         }
     }
