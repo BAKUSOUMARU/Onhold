@@ -11,6 +11,7 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]GameObject _light;
     static public float _battery = 100;
     [SerializeField]Text batteryText;
+    Animator _anim;
 
     [SerializeField]
     float _jumpForce = 1400.0f;      //ジャンプ時に加える力
@@ -37,6 +38,7 @@ public class CharacterMove : MonoBehaviour
         GameManager.instance._hammer = 0;
         GameManager.instance._score = 0;
         this.rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
         _defaultJumpForce = _jumpForce;
     }
 
@@ -76,20 +78,27 @@ public class CharacterMove : MonoBehaviour
         horizontalKey = Input.GetAxis("Horizontal");
         if (!wallJump)
         {
-            //右入力で左向きに動く
+            //右入力で右向きに動く
             if (horizontalKey > 0)
             {
                 rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
+                _anim.SetBool("Rightrun", true);
+                _anim.SetBool("Leftrun", false);
+
             }
             //左入力で左向きに動く
             else if (horizontalKey < 0)
             {
                 rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
+                _anim.SetBool("Leftrun", true);
+                _anim.SetBool("Rightrun", false);
             }
-            //ボタンを話すと止まる
+            //ボタンを離すととまる
             else
             {
                 rb.velocity = new Vector2(0,rb.velocity.y);
+                _anim.SetBool("Leftrun", false);
+                _anim.SetBool("Rightrun", false);
             }
         }
 
