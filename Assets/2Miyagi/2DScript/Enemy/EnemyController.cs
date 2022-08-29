@@ -84,7 +84,6 @@ public class EnemyController : MonoBehaviour
                 for(int i =0; i < _wallDetection.Count ; i++)
                 {
                     _wallDetection[i].gameObject.SetActive(true);
-                    print("c");
                 }
             break;
 

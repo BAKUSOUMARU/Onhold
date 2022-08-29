@@ -8,9 +8,9 @@ public class CharacterMove : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    GameObject _light;
-    bool _lightActive = false;
+    [SerializeField]GameObject _light;
     static public float _battery = 100;
+    [SerializeField]Text batteryText;
 
     [SerializeField]
     float _jumpForce = 1400.0f;      //ƒWƒƒƒ“ƒvŽž‚É‰Á‚¦‚é—Í
@@ -45,17 +45,28 @@ public class CharacterMove : MonoBehaviour
         Move();
         WaterPlayer();
 
-        if (Input.GetKeyDown(KeyCode.Mouse1)){
-            if (_lightActive)
+        if (_light.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                _lightActive = false;
-            }else if (!_lightActive)
+                _light.SetActive(false);
+            }
+
+            if(_battery <= 100)
             {
-                _lightActive = true;
-                if(_battery <= 100)
-                {
-                    _battery -= 0.01f;
-                }
+                _battery -= 0.01f;
+                batteryText.text = string.Format("{0:000}%", _battery);
+            }
+            else if (_battery <= 0)
+            {
+                _light.SetActive(false);
+            }
+        }
+        else if (!_light.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                _light.SetActive(true);
             }
         }
     }
