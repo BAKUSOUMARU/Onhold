@@ -15,7 +15,7 @@ public class ItemGimmick : MonoBehaviour
             {
                 CharacterMove._battery += 100 - CharacterMove._battery;
             }
-            
+            Destroy(this.gameObject);
         }
     }
 }
