@@ -8,6 +8,8 @@ TagManager:
   - DropGround
   - Ground
   - Wall
+  - Enemy
+  - Water
   layers:
   - Default
   - TransparentFX
