@@ -914,11 +914,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 732842292, guid: 9f06290dc3d7ce245be8e80668a95bae, type: 3}
       propertyPath: _loadSceneName
-      value: ResultScene
+      value: gameover
       objectReference: {fileID: 0}
     - target: {fileID: 1718824345, guid: 9f06290dc3d7ce245be8e80668a95bae, type: 3}
       propertyPath: _loadSceneName
-      value: ResultScene
+      value: gameover
       objectReference: {fileID: 0}
     - target: {fileID: 3220339940223978576, guid: 9f06290dc3d7ce245be8e80668a95bae, type: 3}
       propertyPath: m_RootOrder
@@ -5636,11 +5636,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 732842292, guid: 9f06290dc3d7ce245be8e80668a95bae, type: 3}
       propertyPath: _loadSceneName
-      value: ResultScene
+      value: gameover
       objectReference: {fileID: 0}
     - target: {fileID: 1718824345, guid: 9f06290dc3d7ce245be8e80668a95bae, type: 3}
       propertyPath: _loadSceneName
-      value: ResultScene
+      value: gameover
       objectReference: {fileID: 0}
     - target: {fileID: 3220339940223978576, guid: 9f06290dc3d7ce245be8e80668a95bae, type: 3}
       propertyPath: m_RootOrder
@@ -5893,11 +5893,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 732842292, guid: 9f06290dc3d7ce245be8e80668a95bae, type: 3}
       propertyPath: _loadSceneName
-      value: ResultScene
+      value: gameover
       objectReference: {fileID: 0}
     - target: {fileID: 1718824345, guid: 9f06290dc3d7ce245be8e80668a95bae, type: 3}
       propertyPath: _loadSceneName
-      value: ResultScene
+      value: gameover
       objectReference: {fileID: 0}
     - target: {fileID: 3220339940223978576, guid: 9f06290dc3d7ce245be8e80668a95bae, type: 3}
       propertyPath: m_RootOrder
