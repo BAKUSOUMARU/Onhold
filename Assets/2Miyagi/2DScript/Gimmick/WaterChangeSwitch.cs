@@ -26,6 +26,7 @@ public class WaterChangeSwitch : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
+            Destroy(this.gameObject);
             switch (changeGimmick)
             {
                 case ChangeGimmick.LevelIncrease:
