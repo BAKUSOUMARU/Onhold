@@ -42,7 +42,7 @@ public class CharacterMove : MonoBehaviour
         _defaultJumpForce = _jumpForce;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Move();
         WaterPlayer();
@@ -145,6 +145,7 @@ public class CharacterMove : MonoBehaviour
         if(col.gameObject.tag == "Water")
         {
             _boolOxygun = true;
+            
         }
     }
     private void OnTriggerStay2D(Collider2D col)
@@ -203,6 +204,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (_boolOxygun)
         {
+            isGround = true;
             if(_oxygenCount >= 0)
             {
                 _oxygenCount -= 0.05f;
@@ -210,7 +212,9 @@ public class CharacterMove : MonoBehaviour
 
                 rb.gravityScale = _anoxiaGravityScale;
                 _jumpForce = _anoxiaJumpForce;
-            }else if (_oxygenCount <= 0)
+                Coroutine coroutine = StartCoroutine("DelayMethod", _wallJumpCoolTime);
+            }
+            else if (_oxygenCount <= 0)
             {
                 print("finish");
             }
