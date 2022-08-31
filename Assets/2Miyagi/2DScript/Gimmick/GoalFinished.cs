@@ -9,7 +9,7 @@ public class GoalFinished : MonoBehaviour
     {
         if(col.gameObject.tag == "Player"){
             Debug.Log("finish");
-            SceneManager.LoadScene("ResultScene");
+            SceneManager.LoadScene("gameclear");
         }
     }
 }

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Master/Stage/Stage1.unity
     guid: b9c960a27e1ddb04f8817f4d83200c4c
   - enabled: 1
-    path: Assets/Master/Result/ResultScene.unity
+    path: Assets/Master/Result/gameclear.unity
     guid: 17f3f81ac6e6e7f419866a18854d1f1b
+  - enabled: 1
+    path: Assets/Master/Result/gameover.unity
+    guid: 43f83a780e20e5b42842e123a269ce17
   m_configObjects: {}

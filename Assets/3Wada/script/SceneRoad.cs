@@ -5,8 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class SceneRoad : MonoBehaviour
 {
-   public void  Sceneroad(string scene)
+    [SerializeField] SceneChange _sceneChange;
+   public void  Sceneroad()
     {
-        SceneManager.LoadScene(scene);
+        switch (_sceneChange)
+        {
+            case SceneChange.Next:
+                SceneManager.LoadScene(GameManager.instance.NextsceneName);
+                break;
+            case SceneChange.retry:
+                SceneManager.LoadScene(GameManager.instance.retrysceneName);
+                break;
+
+        }
+
+    }
+
+    enum SceneChange
+    {
+        retry,
+        Next
     }
 }
