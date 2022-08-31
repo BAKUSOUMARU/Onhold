@@ -224,7 +224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &363915166
 RectTransform:
   m_ObjectHideFlags: 0
@@ -616,6 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50dace1d65ef3d649883a7a1682ec98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneChange: 0
 --- !u!114 &1177180602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,7 +664,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1177180601}
         m_TargetAssemblyTypeName: SceneRoad, Assembly-CSharp
         m_MethodName: Sceneroad
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

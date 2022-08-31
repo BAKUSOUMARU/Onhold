@@ -8,7 +8,12 @@ public class GameManager : MonoBehaviour
 
     public int _hammer;
 
+    public string retrysceneName = default;
+
+    public string NextsceneName = default;
+
     public static GameManager instance;
+
 
     private void Awake()
     {

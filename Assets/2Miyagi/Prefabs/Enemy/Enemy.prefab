@@ -104,7 +104,7 @@ MonoBehaviour:
   _defaultSpeed: 5
   vhChange: 1
   turnAround: 0
-  _turnTime: 1
+  _turnTime: 0.3
   _wallDetection:
   - {fileID: 3220339941427763686}
   - {fileID: 3220339941886097594}
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1dc512cc9e56f438629a2324ec73eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadSceneName: Stage2ResultScene
+  _loadSceneName: gameover
 --- !u!1 &3220339941759540139
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,4 +413,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1dc512cc9e56f438629a2324ec73eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadSceneName: Stage2ResultScene
+  _loadSceneName: gameover
