@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharacterMove : MonoBehaviour
 {
@@ -33,6 +34,10 @@ public class CharacterMove : MonoBehaviour
     //string state;                 //プレイヤーの状態管理　//ここらへんは使わなかったら消してください.アニメーションなど用
     //string prevState;             //前の状態を保存        //使用例:https://xr-hub.com/archives/8808
     //float _stateEffect = 1;          //状況に応じて横移動速度を変えるための係数
+
+    [SerializeField]
+    [Header("ゲームオーバーのシーン")]
+    string GameOverScene;
     void Start()
     {
         GameManager.instance._hammer = 0;
@@ -40,6 +45,7 @@ public class CharacterMove : MonoBehaviour
         this.rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _defaultJumpForce = _jumpForce;
+        _battery = 100;
     }
 
     private void Update()
@@ -54,7 +60,7 @@ public class CharacterMove : MonoBehaviour
                 _light.SetActive(false);
             }
 
-            if(_battery <= 100)
+            if(_battery >= 0)
             {
                 _battery -= 0.01f;
                 batteryText.text = string.Format("{0:000}%", _battery);
@@ -64,7 +70,7 @@ public class CharacterMove : MonoBehaviour
                 _light.SetActive(false);
             }
         }
-        else if (!_light.activeSelf)
+        else if (!_light.activeSelf && _battery <= 100)
         {
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
@@ -129,6 +135,7 @@ public class CharacterMove : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delayFrameCount);
         if(wallJump)wallJump = false;
+        if (isGround) isGround = false;
         
     }
         private void OnTriggerEnter2D(Collider2D col)
@@ -181,6 +188,7 @@ public class CharacterMove : MonoBehaviour
         if(col.gameObject.tag == "Water")
         {
             _boolOxygun = false;
+            isGround = false;
         }
     }
 
@@ -212,11 +220,10 @@ public class CharacterMove : MonoBehaviour
 
                 rb.gravityScale = _anoxiaGravityScale;
                 _jumpForce = _anoxiaJumpForce;
-                Coroutine coroutine = StartCoroutine("DelayMethod", _wallJumpCoolTime);
             }
             else if (_oxygenCount <= 0)
             {
-                print("finish");
+                SceneManager.LoadScene(GameOverScene);
             }
         }
         else if (!_boolOxygun)
