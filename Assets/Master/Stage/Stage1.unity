@@ -5412,7 +5412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8297606051462243145, guid: 1356635e924cb1c4398edd9774add356, type: 3}
       propertyPath: _jumpForce
-      value: 1400
+      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 8297606051462243145, guid: 1356635e924cb1c4398edd9774add356, type: 3}
       propertyPath: oxugenText
@@ -5423,8 +5423,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2065639603}
     - target: {fileID: 8297606051462243145, guid: 1356635e924cb1c4398edd9774add356, type: 3}
+      propertyPath: GameOverScene
+      value: gameover
+      objectReference: {fileID: 0}
+    - target: {fileID: 8297606051462243145, guid: 1356635e924cb1c4398edd9774add356, type: 3}
+      propertyPath: _anoxiaJumpForce
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 8297606051462243145, guid: 1356635e924cb1c4398edd9774add356, type: 3}
       propertyPath: _wallJumpCoolTime
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8297606051462243145, guid: 1356635e924cb1c4398edd9774add356, type: 3}
+      propertyPath: _anoxiaGravityScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1356635e924cb1c4398edd9774add356, type: 3}
