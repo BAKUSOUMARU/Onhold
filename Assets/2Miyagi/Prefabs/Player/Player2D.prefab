@@ -43,9 +43,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.78431374, g: 0.78431374, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 40
   m_Range: 11
-  m_SpotAngle: 60
+  m_SpotAngle: 73
   m_InnerSpotAngle: 6
   m_CookieSize: 10
   m_Shadows:
@@ -122,7 +122,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8297606051462243144}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -23.9, y: -0.01, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -149,7 +149,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4684c043bc095cd498d9c275284034ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -258,14 +258,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _light: {fileID: 1247370824}
   batteryText: {fileID: 0}
-  _jumpForce: 1400
+  _jumpForce: 1200
   _runSpeed: 8
   _wallJumpCoolTime: 0.3
+  GameOverScene: gameover
   _oxygenCount: 100
   oxugenText: {fileID: 0}
-  _defaultGravityScale: 8
-  _anoxiaGravityScale: 2
-  _anoxiaJumpForce: 700
+  _defaultGravityScale: 6
+  _anoxiaGravityScale: 1
+  _anoxiaJumpForce: 400
 --- !u!95 &1480222876
 Animator:
   serializedVersion: 3
