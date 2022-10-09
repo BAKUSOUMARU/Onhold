@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +8,10 @@ public class CharacterMove : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    [SerializeField]GameObject _light;
-    static public float _battery = 100;
-    [SerializeField]Text batteryText;
+    [SerializeField]GameObject _light;//lightのオブジェクト
+    static public float _battery = 100;//バッテリー残量
+    [SerializeField]Text batteryText;//バッテリーテキスト
+
     Animator _anim;
 
     [SerializeField]
@@ -27,13 +27,9 @@ public class CharacterMove : MonoBehaviour
 
     float horizontalKey;
     
-    bool isGround = true;           //地面と設置しているか管理するフラグ
-    bool isWall = false;             //
-    bool wallJump = false;
-
-    //string state;                 //プレイヤーの状態管理　//ここらへんは使わなかったら消してください.アニメーションなど用
-    //string prevState;             //前の状態を保存        //使用例:https://xr-hub.com/archives/8808
-    //float _stateEffect = 1;          //状況に応じて横移動速度を変えるための係数
+    bool isGround = true;           //地面と接しているか管理するフラグ
+    bool isWall = false;            //壁に接しているかのフラグ
+    bool wallJump = false;          //壁ジャン後の遅延用
 
     [SerializeField]
     [Header("ゲームオーバーのシーン")]
@@ -52,7 +48,14 @@ public class CharacterMove : MonoBehaviour
     {
         Move();
         WaterPlayer();
+        LightMove();
+    }
 
+    /// <summary>
+    /// ライトを操作
+    /// </summary>
+    private void LightMove()
+    {
         if (_light.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -60,7 +63,7 @@ public class CharacterMove : MonoBehaviour
                 _light.SetActive(false);
             }
 
-            if(_battery >= 0)
+            if (_battery >= 0)
             {
                 _battery -= 0.01f;
                 batteryText.text = string.Format("{0:000}%", _battery);
@@ -79,6 +82,9 @@ public class CharacterMove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 基本的な動きの操作
+    /// </summary>
     private void Move()
     {
         horizontalKey = Input.GetAxis("Horizontal");
@@ -125,19 +131,19 @@ public class CharacterMove : MonoBehaviour
                     rb.AddForce(new Vector2(-rb.velocity.x, 10f) * 125);
                     isWall = false;
                     wallJump = true;
-                    Coroutine coroutine = StartCoroutine("DelayMethod", _wallJumpCoolTime);
+                    Coroutine coroutine = StartCoroutine("WallDelay", _wallJumpCoolTime);
                 }
             }
         }
     }
 
-    private IEnumerator DelayMethod(float delayFrameCount)
+    private IEnumerator WallDelay(float delayFrameCount)
     {
         yield return new WaitForSecondsRealtime(delayFrameCount);
         if(wallJump)wallJump = false;
         if (isGround) isGround = false;
         
-    }
+    }//壁ジャンのディレイ
         private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "Enemy"){
@@ -193,10 +199,10 @@ public class CharacterMove : MonoBehaviour
     }
 
     [SerializeField]
-    float _oxygenCount = 100;
+    float _oxygenCount = 100;//酸素ゲージ
 
     [SerializeField]
-    Text oxugenText;
+    Text oxugenText;//酸素Text
 
     bool _boolOxygun;
 
@@ -208,6 +214,10 @@ public class CharacterMove : MonoBehaviour
 
     [SerializeField]
     float _anoxiaJumpForce;
+
+    /// <summary>
+    ///水に入ってる時の操作 
+    /// </summary>
     void WaterPlayer()
     {
         if (_boolOxygun)
