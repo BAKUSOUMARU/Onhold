@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("基本設定")]
-    [SerializeField] 
-    [Tooltip("基本の速さ")]
-    float _defaultSpeed = 5;
+    [Header("基本設定"), Tooltip("基本の速さ")]
+    [SerializeField]
+    float _defaultSpeed = 5; //通常速度
 
     Rigidbody2D rb;
     enum VerticalHorizontalChange
     {
         Vertical,
         Horizontal
-    }
+    }//どこに移動するかのEnum(縦 or 横)
 
-    [Header("反転設定")]
+    [Header("反転設定"), Tooltip("移動方向 : 縦 / 横")]
     [SerializeField]
-    [Tooltip("移動方向 : 縦 / 横")]
     VerticalHorizontalChange vhChange;
 
     enum TurnAround
@@ -26,27 +24,27 @@ public class EnemyController : MonoBehaviour
         Time,
         WallTouch,
         FloorContact
-    }
+    }//どのように反転するかのEnum(時間 or 壁に当たった時 or 床に触れてないとき)
 
-    [SerializeField]
     [Tooltip("反転方法 : 時間 / 壁に当たった時 / 床に触れてないとき")]
+    [SerializeField]
     TurnAround turnAround;
 
+    [Tooltip("反転方法が「 Time 」の場合の 反転時間(s)")]
     [SerializeField]
-    [Tooltip("反転方法が「Time」の場合の 反転時間(s)")]
     float _turnTime = 10;
 
-    float _countTime = 0;
+    float _countTime = 0;//反転方法が「 Time 」の場合に動く変数　(ちょっと変えれば使わなくてもいい)
 
-    bool _wallTouch = false;
-    bool _floorContact = false;
+    bool _wallTouch = false;//反転方法が「 WallTouch 」の場合のbool
+    bool _floorContact = false;//反転方法が「 FloorContact 」の場合のbool
 
-    [SerializeField]
     [Tooltip("壁を検知する当たり判定")]
+    [SerializeField]
     List<GameObject> _wallDetection = new List<GameObject>();
 
-    [SerializeField]
     [Tooltip("床を検知する当たり判定")]
+    [SerializeField]
     List<GameObject> _floorDetection = new List<GameObject>();
     private void Start()
     {
@@ -66,7 +64,7 @@ public class EnemyController : MonoBehaviour
             case VerticalHorizontalChange.Vertical:
                 rb.velocity = new Vector2(rb.velocity.x, _defaultSpeed);
                 break;
-        }
+        }//移動設定(縦 or 横)
 
         switch (turnAround)
         {
@@ -94,7 +92,7 @@ public class EnemyController : MonoBehaviour
                     _floorDetection[i].gameObject.SetActive(true);
                 }
                 break;
-        }
+        }//反転設定(時間 or 壁に当たった時 or 床に触れてないとき)
     }
 
     private void OnTriggerEnter2D(Collider2D col)

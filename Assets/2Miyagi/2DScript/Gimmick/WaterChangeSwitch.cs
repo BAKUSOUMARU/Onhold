@@ -8,7 +8,7 @@ public class WaterChangeSwitch : MonoBehaviour
     [SerializeField]enum ChangeGimmick{
         LevelIncrease,
         Stream
-    }
+    }//横か縦に増えるか選択する
     
     [Header("ギミックの対象を選択")]
     [SerializeField]WaterGimmick changeTarget;

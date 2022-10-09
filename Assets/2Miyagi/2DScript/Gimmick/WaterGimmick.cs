@@ -15,7 +15,8 @@ namespace Gimmick.Water
 
         
         float _streamScaleSize;
-        [SerializeField]float _streamAddScale = 0.1f;
+        [SerializeField]
+        float _streamAddScale = 0.1f;
 
         public float _finishChangeWater = 5f;
 
@@ -51,15 +52,22 @@ namespace Gimmick.Water
             /*if(col.gameObject.tag == "Substance")
             {
                 Destroy(col.gameObject); //これはtag追加したときにコメントアウト外してください
-            }*/
+            }//水に触れたとき「 Substance 」オブジェクトを破壊する*/
         }
 
-        public void WaterLevelIncrease()//水位上昇
+        /// <summary>
+        /// 縦に水が増える
+        /// </summary>
+        public void WaterLevelIncrease()
         {
             this.transform.localScale = new Vector3(defaultWaterVector.x, _riseScaleSize, defaultWaterVector.z);
             _riseScaleSize += _riseAddScale;
         }
-        public void WaterStream()//流水
+
+        /// <summary>
+        /// 横に水が増える
+        /// </summary>
+        public void WaterStream()
         {
             this.transform.localScale = new Vector3(_streamScaleSize, defaultWaterVector.y, defaultWaterVector.z);
             _streamScaleSize += _streamAddScale;
@@ -70,7 +78,7 @@ namespace Gimmick.Water
             yield return new WaitForSeconds(_finishChangeWater);
             _waterSwitch = false;
             _runningWater = false;
-        }
+        }//水が変化し終わるまでの遅延
     }
 }
 
