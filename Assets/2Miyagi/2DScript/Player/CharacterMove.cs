@@ -89,15 +89,17 @@ public class CharacterMove : MonoBehaviour
     private void Move()
     {
         horizontalKey = Input.GetAxis("Horizontal");
-        velocity = velocity - rb.velocity;
-        velocity = new Vector2(Mathf.Clamp(velocity.x, -_runSpeed, _runSpeed),Mathf.Clamp(velocity.y,-jumpspeed, jumpspeed));
+
+        Vector2 moveVector = new Vector2(8,1000);
+        //velocity = velocity - rb.velocity;
+        //velocity = new Vector2(Mathf.Clamp(velocity.x, -_runSpeed, _runSpeed),Mathf.Clamp(velocity.y,-jumpspeed, jumpspeed));
         if (!wallJump)
         {
             //‰E“ü—Í‚Å‰EŒü‚«‚É“®‚­
             if (horizontalKey > 0)
             {
                 //rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
-                rb.AddForce(Vector2.right*_runSpeed, ForceMode2D.Force);
+                rb.AddForce(Vector2.right *(moveVector - rb.velocity), ForceMode2D.Force);
                 _anim.SetBool("Rightrun", true);
                 _anim.SetBool("Leftrun", false);
 
@@ -106,7 +108,7 @@ public class CharacterMove : MonoBehaviour
             else if (horizontalKey < 0)
             {
                 //rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
-                rb.AddForce(Vector2.left*_runSpeed, ForceMode2D.Force);
+                rb.AddForce(Vector2.left *(moveVector + rb.velocity), ForceMode2D.Force);
                 _anim.SetBool("Leftrun", true);
                 _anim.SetBool("Rightrun", false);
             }
@@ -123,8 +125,8 @@ public class CharacterMove : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                 //this.rb.AddForce(transform.up * this._jumpForce);
-                rb.AddForce(Vector2.up * _jumpForce,ForceMode2D.Force);
+
+                rb.AddForce(Vector2.up * (moveVector + rb.velocity), ForceMode2D.Force);     
                 isGround = false;
             }
         }
