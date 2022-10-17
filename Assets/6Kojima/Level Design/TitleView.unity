@@ -933,7 +933,7 @@ GameObject:
   - component: {fileID: 371696320}
   - component: {fileID: 371696319}
   m_Layer: 5
-  m_Name: Start view_Position_Button
+  m_Name: Start view_Button_Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3338,7 +3338,7 @@ GameObject:
   - component: {fileID: 1922048922}
   - component: {fileID: 1922048921}
   m_Layer: 5
-  m_Name: Position_Panel_Stage Select
+  m_Name: Stage select_Panel_Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
