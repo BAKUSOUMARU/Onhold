@@ -256,14 +256,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af43d408d8ff23428e34ec2d3fef395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerData: {fileID: 0}
+  _poisontrap: {fileID: 0}
   _light: {fileID: 1247370824}
-  batteryText: {fileID: 0}
-  _jumpForce: 1200
+  jumpspeed: 8
+  _jumpForce: 1500
   _runSpeed: 8
   _wallJumpCoolTime: 0.3
   GameOverScene: gameover
-  _oxygenCount: 100
-  oxugenText: {fileID: 0}
   _defaultGravityScale: 6
   _anoxiaGravityScale: 1
   _anoxiaJumpForce: 400

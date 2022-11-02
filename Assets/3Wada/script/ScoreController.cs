@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class scorecontroller : MonoBehaviour
+public class ScoreController : MonoBehaviour
 {
     [SerializeField] Text _scoreText;
     // Start is called before the first frame update
@@ -14,6 +14,6 @@ public class scorecontroller : MonoBehaviour
 
     void ResultScore()
     {
-        _scoreText.text = "Šl“¾‚µ‚½•óÎ‚Ì”:" + GameManager.instance._score.ToString();   
+        _scoreText.text = "Å lâ€œÂ¾â€šÂµâ€šÂ½â€¢Ã³ÂÃâ€šÃŒÂâ€:" + GameManager.instance.Score.ToString();   
     }
 }
