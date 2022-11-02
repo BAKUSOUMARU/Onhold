@@ -20,7 +20,7 @@ public class PoisonTrap: MonoBehaviour
         if (istrap) 
         {  
             PoisonMove();
-            Debug.Log("“®‚¢‚½");
+            Debug.Log("â€œÂ®â€šÂ¢â€šÂ½");
         }
     }
     
