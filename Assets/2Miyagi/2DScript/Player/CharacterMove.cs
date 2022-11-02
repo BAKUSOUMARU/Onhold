@@ -55,7 +55,7 @@ public class CharacterMove : MonoBehaviour
         _defaultJumpForce = _jumpForce;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {    
         Move();
         WaterPlayer();
