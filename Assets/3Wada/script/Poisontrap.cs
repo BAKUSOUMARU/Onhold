@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Poisontrap : MonoBehaviour
+public class PoisonTrap: MonoBehaviour
 {
     [SerializeField] GameObject _poisontrap;
     [SerializeField] float _addScale = 0.01f;
     [SerializeField] int _startTrap = 1;
     float _scalesize = 1;
+    bool istrap= false;
     Transform _tr;
     // Start is called before the first frame update
     void Start()
     {
          _tr = GetComponent<Transform>();
     }
-
-    // Update is called once per frame
     private void FixedUpdate()
     {
-        if (GameManager.instance._hammer > _startTrap - 1) 
+        if (istrap) 
         {  
-            PoisonMove();    
+            PoisonMove();
+            Debug.Log("“®‚¢‚½");
         }
     }
     
@@ -28,5 +28,15 @@ public class Poisontrap : MonoBehaviour
     {
         this.transform.localScale =new Vector3(_scalesize, 6, 1);
         _scalesize += _addScale;
+    }
+
+    public void IstrapTure()
+    {
+        istrap = true;
+    }
+
+    public void IstrapFalse()
+    {
+        istrap = false;
     }
 }

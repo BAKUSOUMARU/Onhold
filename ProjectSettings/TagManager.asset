@@ -10,6 +10,9 @@ TagManager:
   - Wall
   - Enemy
   - Water
+  - Battery
+  - Hammer
+  - HammerWall
   layers:
   - Default
   - TransparentFX
