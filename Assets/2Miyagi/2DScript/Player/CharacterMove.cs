@@ -11,7 +11,8 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]GameObject _light;//lightのオブジェクト
     static public float _battery = 100;//バッテリー残量
     [SerializeField]Text batteryText;//バッテリーテキスト
-
+     private Vector2 velocity;
+    [SerializeField] private float jumpspeed =8f;
     Animator _anim;
 
     [SerializeField]
@@ -88,12 +89,17 @@ public class CharacterMove : MonoBehaviour
     private void Move()
     {
         horizontalKey = Input.GetAxis("Horizontal");
+
+        Vector2 moveVector = new Vector2(8,1000);
+        //velocity = velocity - rb.velocity;
+        //velocity = new Vector2(Mathf.Clamp(velocity.x, -_runSpeed, _runSpeed),Mathf.Clamp(velocity.y,-jumpspeed, jumpspeed));
         if (!wallJump)
         {
             //右入力で右向きに動く
             if (horizontalKey > 0)
             {
-                rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
+                //rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
+                rb.AddForce(Vector2.right *(moveVector - rb.velocity), ForceMode2D.Force);
                 _anim.SetBool("Rightrun", true);
                 _anim.SetBool("Leftrun", false);
 
@@ -101,7 +107,8 @@ public class CharacterMove : MonoBehaviour
             //左入力で左向きに動く
             else if (horizontalKey < 0)
             {
-                rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
+                //rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
+                rb.AddForce(Vector2.left *(moveVector + rb.velocity), ForceMode2D.Force);
                 _anim.SetBool("Leftrun", true);
                 _anim.SetBool("Rightrun", false);
             }
@@ -118,7 +125,8 @@ public class CharacterMove : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                this.rb.AddForce(transform.up * this._jumpForce);
+
+                rb.AddForce(Vector2.up * (moveVector + rb.velocity), ForceMode2D.Force);     
                 isGround = false;
             }
         }
