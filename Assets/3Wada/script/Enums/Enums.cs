@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OnholdEnums
+namespace Onhold.Enums
 {
     public enum Scenes
     {
