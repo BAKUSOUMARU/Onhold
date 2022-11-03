@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     
     public int Score => _score;
 
+    int _reset = 0;
     private void Awake()
     {
         if (instance == null)
@@ -34,6 +35,6 @@ public class GameManager : MonoBehaviour
 
     public void ScoreReset()
     {
-        _score = 0;
+        _score = _reset;
     }
 }

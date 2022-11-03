@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
+using Onhold.SceneLoader;
 public class CharacterMove : MonoBehaviour
 {
     [SerializeField] PlayerData _playerData;
@@ -264,7 +263,7 @@ public class CharacterMove : MonoBehaviour
             }
             else if (_playerData.Oxygen.Value <= 0)
             {
-                SceneManager.LoadScene(GameOverScene);
+                SceneChange.NextScene(8);
             }
         }
         else if (!_boolOxygun)

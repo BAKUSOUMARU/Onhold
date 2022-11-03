@@ -14,6 +14,6 @@ public class ScoreController : MonoBehaviour
 
     void ResultScore()
     {
-        _scoreText.text = "Šl“¾‚µ‚½•óÎ‚Ì”:" + GameManager.instance.Score.ToString();   
+        _scoreText.text = "獲得した宝石の数" + GameManager.instance.Score.ToString();   
     }
 }
