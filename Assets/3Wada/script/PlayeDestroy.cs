@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Onhold.SceneLoader;
+using Onhold.Scene;
 public class PlayeDestroy : MonoBehaviour
 {
     [SerializeField]int _sceneIndex = 8;

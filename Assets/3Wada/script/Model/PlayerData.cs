@@ -11,6 +11,8 @@ public class PlayerData : MonoBehaviour
 
     public IntReactiveProperty Hammer = new IntReactiveProperty(0);
 
+    public IntReactiveProperty LIfe = new IntReactiveProperty(3);
+
     public void BatteryHeel()
     {
         if (Battery.Value <= 80)
