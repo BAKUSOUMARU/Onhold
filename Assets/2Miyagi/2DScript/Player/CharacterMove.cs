@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Onhold.SceneLoader;
+using Onhold.Scene;
 public class CharacterMove : MonoBehaviour
 {
     [SerializeField] PlayerData _playerData;
