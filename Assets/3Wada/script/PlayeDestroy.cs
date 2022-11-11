@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
+using Onhold.Scene;
 public class PlayeDestroy : MonoBehaviour
 {
-    [SerializeField] string _loadSceneName;
+    [SerializeField]int _sceneIndex = 8;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -18,6 +17,6 @@ public class PlayeDestroy : MonoBehaviour
 
     public void GameOver()
     {
-        SceneManager.LoadScene(_loadSceneName);
+        SceneChange.NextScene(_sceneIndex);
     }
 }

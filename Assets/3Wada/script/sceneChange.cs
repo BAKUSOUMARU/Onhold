@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.SceneManagement;
+using Onhold.Enums;
 
-public class sceneChange : MonoBehaviour
+namespace Onhold.Scene
 {
-    [SerializeField] string retrysceneName;
-    [SerializeField] string nextsceneName;
-
-    void Start()
+    public class SceneChange
     {
-        GameManager.instance.retrysceneName = retrysceneName;
-        GameManager.instance.NextsceneName = nextsceneName;
+        public static void NextScene(int scenesIndex)
+        {
+            var sceceName = (Scenes)scenesIndex;
+            SceneManager.LoadScene(sceceName.ToString());
+        }
     }
-
 }

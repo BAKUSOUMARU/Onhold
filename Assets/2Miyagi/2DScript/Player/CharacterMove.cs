@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
+using Onhold.Scene;
 public class CharacterMove : MonoBehaviour
 {
+    [SerializeField] PlayerData _playerData;
     private Rigidbody2D rb;
 
-    [SerializeField]GameObject _light;//lightのオブジェクト
-    static public float _battery = 100;//バッテリー残量
-    [SerializeField]Text batteryText;//バッテリーテキスト
+    [SerializeField] 
+    PoisonTrap _poisontrap;
 
+    [SerializeField]GameObject _light;//lightのオブジェクト
+
+    [SerializeField] private float jumpspeed =8f;
     Animator _anim;
 
     [SerializeField]
@@ -34,22 +35,34 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]
     [Header("ゲームオーバーのシーン")]
     string GameOverScene;
+
+    bool _boolOxygun;
+
+    [SerializeField]
+    float _defaultGravityScale = 8; //酸素上の重力
+
+    [SerializeField]
+    float _anoxiaGravityScale; //無酸素状態の重力
+
+    [SerializeField]
+    float _anoxiaJumpForce;
     void Start()
     {
-        GameManager.instance._hammer = 0;
-        GameManager.instance._score = 0;
+        GameManager.instance.ScoreReset();
         this.rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _defaultJumpForce = _jumpForce;
-        _battery = 100;
     }
 
     private void Update()
-    {
+    {    
         Move();
         WaterPlayer();
         LightMove();
     }
+    
+        
+    
 
     /// <summary>
     /// ライトを操作
@@ -63,17 +76,16 @@ public class CharacterMove : MonoBehaviour
                 _light.SetActive(false);
             }
 
-            if (_battery >= 0)
+            if (_playerData.Battery.Value >= 0)
             {
-                _battery -= 0.01f;
-                batteryText.text = string.Format("{0:000}%", _battery);
+                _playerData.BatteryReduce();
             }
-            else if (_battery <= 0)
+            else if (_playerData.Battery.Value <= 0)
             {
                 _light.SetActive(false);
             }
         }
-        else if (!_light.activeSelf && _battery <= 100)
+        else if (!_light.activeSelf && _playerData.Battery.Value <= 100)
         {
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
@@ -88,12 +100,17 @@ public class CharacterMove : MonoBehaviour
     private void Move()
     {
         horizontalKey = Input.GetAxis("Horizontal");
+
+        Vector2 moveVector = new Vector2(8,1000);
+        //velocity = velocity - rb.velocity;
+        //velocity = new Vector2(Mathf.Clamp(velocity.x, -_runSpeed, _runSpeed),Mathf.Clamp(velocity.y,-jumpspeed, jumpspeed));
         if (!wallJump)
         {
             //右入力で右向きに動く
             if (horizontalKey > 0)
             {
-                rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
+                //rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
+                rb.AddForce(Vector2.right *(moveVector - rb.velocity), ForceMode2D.Force);
                 _anim.SetBool("Rightrun", true);
                 _anim.SetBool("Leftrun", false);
 
@@ -101,7 +118,8 @@ public class CharacterMove : MonoBehaviour
             //左入力で左向きに動く
             else if (horizontalKey < 0)
             {
-                rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
+                //rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
+                rb.AddForce(Vector2.left *(moveVector + rb.velocity), ForceMode2D.Force);
                 _anim.SetBool("Leftrun", true);
                 _anim.SetBool("Rightrun", false);
             }
@@ -118,7 +136,8 @@ public class CharacterMove : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                this.rb.AddForce(transform.up * this._jumpForce);
+
+                rb.AddForce(Vector2.up * (moveVector + rb.velocity), ForceMode2D.Force);     
                 isGround = false;
             }
         }
@@ -160,6 +179,17 @@ public class CharacterMove : MonoBehaviour
             _boolOxygun = true;
             
         }
+        if (col.gameObject.tag == "Battery")
+        {
+            _playerData.BatteryHeel();
+            Destroy(col.gameObject);
+        }
+        if (col.gameObject.tag == "Hammer")
+        {
+            _playerData.HammerUP();
+            Destroy(col.gameObject);
+            _poisontrap.IstrapTure();
+        }
     }
     private void OnTriggerStay2D(Collider2D col)
     {
@@ -198,22 +228,22 @@ public class CharacterMove : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    float _oxygenCount = 100;//酸素ゲージ
-
-    [SerializeField]
-    Text oxugenText;//酸素Text
-
-    bool _boolOxygun;
-
-    [SerializeField]
-    float _defaultGravityScale = 8; //酸素上の重力
-
-    [SerializeField]
-    float _anoxiaGravityScale; //無酸素状態の重力
-
-    [SerializeField]
-    float _anoxiaJumpForce;
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "HammerWall")
+        {
+            if (_playerData.Hammer.Value == 0)
+            {
+                return;
+            }
+            else
+            {
+                _playerData.HammerDown();
+                Destroy(collision.gameObject);
+                
+            }
+        }
+    }
 
     /// <summary>
     ///水に入ってる時の操作 
@@ -223,29 +253,31 @@ public class CharacterMove : MonoBehaviour
         if (_boolOxygun)
         {
             isGround = true;
-            if(_oxygenCount >= 0)
+            if(_playerData.Oxygen.Value >= 0)
             {
-                _oxygenCount -= 0.05f;
-                oxugenText.text = string.Format("{0:000}oxy",_oxygenCount);
+                _playerData.OxygenDown();
+                
 
                 rb.gravityScale = _anoxiaGravityScale;
                 _jumpForce = _anoxiaJumpForce;
             }
-            else if (_oxygenCount <= 0)
+            else if (_playerData.Oxygen.Value <= 0)
             {
-                SceneManager.LoadScene(GameOverScene);
+                SceneChange.NextScene(8);
             }
         }
         else if (!_boolOxygun)
         {
-            if(_oxygenCount <= 100)
+            if(_playerData.Oxygen.Value <= 100)
             {
-                _oxygenCount += 0.05f;
-                oxugenText.text = string.Format("{0:000}oxy", _oxygenCount);
-
+                _playerData.OxygenUp();
                 rb.gravityScale = _defaultGravityScale;
                 _jumpForce = _defaultJumpForce;
             }
         }
     }
+
+  
 }
+
+
