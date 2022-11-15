@@ -6,7 +6,7 @@ namespace ISDevTemplateEditor
     [CustomEditor(typeof(JsonStageSelect))]
     public class SaveDataManagerEditor : Editor
     {
-        [SerializeField] string _stageNunber;
+        [SerializeField] int _stageNunber;
         public override void OnInspectorGUI()
         {
             var maneger = target as JsonStageSelect;
@@ -14,7 +14,7 @@ namespace ISDevTemplateEditor
             DrawDefaultInspector();
 
             EditorGUILayout.Space(5f);
-            _stageNunber = EditorGUILayout.TextField("保存したいステージ名", _stageNunber);
+            _stageNunber = EditorGUILayout.IntField("保存したいステージ数", _stageNunber);
 
             EditorGUILayout.BeginHorizontal();
 

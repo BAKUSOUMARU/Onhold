@@ -5,7 +5,7 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
-    public string _stageNumber;
+    public int StageNumber;
 }
 
 public class JsonStageSelect : MonoBehaviour
@@ -20,7 +20,7 @@ public class JsonStageSelect : MonoBehaviour
 
     [SerializeField]
     [Header("ステージのボタン")]
-    private List<GameObject> _stageButton;
+    private GameObject[] _stageButton;
 
     void Awake()
     {
@@ -32,7 +32,7 @@ public class JsonStageSelect : MonoBehaviour
         Load();
     }
 
-    public void Save(string _nowStageNumber)
+    public void Save(int _nowStageNumber)
     {
         if (!File.Exists(_filePath))
         {
@@ -42,7 +42,7 @@ public class JsonStageSelect : MonoBehaviour
         {
             new SaveData();
         }
-        _saveData._stageNumber = _nowStageNumber;
+        _saveData.StageNumber = _nowStageNumber;
 
         string json = JsonUtility.ToJson(_saveData);
         StreamWriter streamWriter = new StreamWriter(_filePath);
@@ -61,49 +61,17 @@ public class JsonStageSelect : MonoBehaviour
 
             _saveData = JsonUtility.FromJson<SaveData>(_data);
 
-            switch (_saveData._stageNumber)
+            for (int s = 0; s <= _saveData.StageNumber; s++)
             {
-                case "Stage1":
-                    _stageButton[0].SetActive(true);
-                    Debug.Log("ステージ1までを開放");
-                    break;
-
-                case "Stage2":
-                    _stageButton[0].SetActive(true);
-                    _stageButton[1].SetActive(true);
-                    Debug.Log("ステージ2までを開放");
-                    break;
-
-                case "Stage3":
-                    _stageButton[0].SetActive(true);
-                    _stageButton[1].SetActive(true);
-                    _stageButton[2].SetActive(true);
-                    Debug.Log("ステージ3までを開放");
-                    break;
-
-                case "Stage4":
-                    _stageButton[0].SetActive(true);
-                    _stageButton[1].SetActive(true);
-                    _stageButton[2].SetActive(true);
-                    _stageButton[3].SetActive(true);
-                    Debug.Log("ステージ4までを開放");
-                    break;
-
-                case "Stage5":
-                    _stageButton[0].SetActive(true);
-                    _stageButton[1].SetActive(true);
-                    _stageButton[2].SetActive(true);
-                    _stageButton[3].SetActive(true);
-                    _stageButton[4].SetActive(true);
-                    Debug.Log("ステージ5までを開放");
-                    break;
+                _stageButton[s].SetActive(true);
+                Debug.Log("ステージ" + s + "までを開放");
             }
         }
     }
 
     public void ResetSaveData()
     {
-        _saveData._stageNumber = "Stage1";
+        _saveData.StageNumber = 1;
         Debug.Log("リセット");
     }
 }
