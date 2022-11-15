@@ -1,5 +1,4 @@
-using UnityEngine;
-using System.Collections.Generic;
+ï»¿using UnityEngine;
 using System.IO;
 
 [System.Serializable]
@@ -11,15 +10,15 @@ public class SaveData
 public class JsonStageSelect : MonoBehaviour
 {
     [SerializeField]
-    [Header("ƒZ[ƒuƒf[ƒ^")]
+    [Header("ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿")]
     private SaveData _saveData;
 
     [SerializeField]
-    [Header("ƒtƒ@ƒCƒ‹‚ÌêŠ")]
+    [Header("ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´æ‰€")]
     private string _filePath;
 
     [SerializeField]
-    [Header("ƒXƒe[ƒW‚Ìƒ{ƒ^ƒ“")]
+    [Header("ã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒœã‚¿ãƒ³")]
     private GameObject[] _stageButton;
 
     void Awake()
@@ -32,7 +31,7 @@ public class JsonStageSelect : MonoBehaviour
         Load();
     }
 
-    public void Save(int _nowStageNumber)
+    public void Save(int nowStageNumber)
     {
         if (!File.Exists(_filePath))
         {
@@ -42,7 +41,7 @@ public class JsonStageSelect : MonoBehaviour
         {
             new SaveData();
         }
-        _saveData.StageNumber = _nowStageNumber;
+        _saveData.StageNumber = nowStageNumber;
 
         string json = JsonUtility.ToJson(_saveData);
         StreamWriter streamWriter = new StreamWriter(_filePath);
@@ -61,10 +60,10 @@ public class JsonStageSelect : MonoBehaviour
 
             _saveData = JsonUtility.FromJson<SaveData>(_data);
 
-            for (int s = 0; s <= _saveData.StageNumber; s++)
+            for (int i = 0; i <= _saveData.StageNumber; i++)
             {
-                _stageButton[s].SetActive(true);
-                Debug.Log("ƒXƒe[ƒW" + s + "‚Ü‚Å‚ğŠJ•ú");
+                _stageButton[i].SetActive(true);
+                Debug.Log("ã‚¹ãƒ†ãƒ¼ã‚¸" + i + 1 + "ã¾ã§ã‚’é–‹æ”¾");
             }
         }
     }
@@ -72,6 +71,6 @@ public class JsonStageSelect : MonoBehaviour
     public void ResetSaveData()
     {
         _saveData.StageNumber = 1;
-        Debug.Log("ƒŠƒZƒbƒg");
+        Debug.Log("ãƒªã‚»ãƒƒãƒˆ");
     }
 }

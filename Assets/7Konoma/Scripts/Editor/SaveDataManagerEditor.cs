@@ -27,7 +27,6 @@ namespace ISDevTemplateEditor
             if (GUILayout.Button("ƒŠƒZƒbƒg")) maneger.ResetSaveData();
 
             EditorGUILayout.EndHorizontal();
-
         }
     }
 }
