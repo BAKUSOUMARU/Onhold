@@ -1,26 +1,25 @@
-using UnityEngine;
-using System.Collections.Generic;
+ï»¿using UnityEngine;
 using System.IO;
 
 [System.Serializable]
 public class SaveData
 {
-    public string _stageNumber;
+    public int StageNumber;
 }
 
 public class JsonStageSelect : MonoBehaviour
 {
     [SerializeField]
-    [Header("ƒZ[ƒuƒf[ƒ^")]
+    [Header("ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿")]
     private SaveData _saveData;
 
     [SerializeField]
-    [Header("ƒtƒ@ƒCƒ‹‚ÌêŠ")]
+    [Header("ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´æ‰€")]
     private string _filePath;
 
     [SerializeField]
-    [Header("ƒXƒe[ƒW‚Ìƒ{ƒ^ƒ“")]
-    private List<GameObject> _stageButton;
+    [Header("ã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒœã‚¿ãƒ³")]
+    private GameObject[] _stageButton;
 
     void Awake()
     {
@@ -32,7 +31,7 @@ public class JsonStageSelect : MonoBehaviour
         Load();
     }
 
-    public void Save(string _nowStageNumber)
+    public void Save(int nowStageNumber)
     {
         if (!File.Exists(_filePath))
         {
@@ -42,7 +41,7 @@ public class JsonStageSelect : MonoBehaviour
         {
             new SaveData();
         }
-        _saveData._stageNumber = _nowStageNumber;
+        _saveData.StageNumber = nowStageNumber;
 
         string json = JsonUtility.ToJson(_saveData);
         StreamWriter streamWriter = new StreamWriter(_filePath);
@@ -61,49 +60,17 @@ public class JsonStageSelect : MonoBehaviour
 
             _saveData = JsonUtility.FromJson<SaveData>(_data);
 
-            switch (_saveData._stageNumber)
+            for (int i = 0; i <= _saveData.StageNumber; i++)
             {
-                case "Stage1":
-                    _stageButton[0].SetActive(true);
-                    Debug.Log("ƒXƒe[ƒW1‚Ü‚Å‚ğŠJ•ú");
-                    break;
-
-                case "Stage2":
-                    _stageButton[0].SetActive(true);
-                    _stageButton[1].SetActive(true);
-                    Debug.Log("ƒXƒe[ƒW2‚Ü‚Å‚ğŠJ•ú");
-                    break;
-
-                case "Stage3":
-                    _stageButton[0].SetActive(true);
-                    _stageButton[1].SetActive(true);
-                    _stageButton[2].SetActive(true);
-                    Debug.Log("ƒXƒe[ƒW3‚Ü‚Å‚ğŠJ•ú");
-                    break;
-
-                case "Stage4":
-                    _stageButton[0].SetActive(true);
-                    _stageButton[1].SetActive(true);
-                    _stageButton[2].SetActive(true);
-                    _stageButton[3].SetActive(true);
-                    Debug.Log("ƒXƒe[ƒW4‚Ü‚Å‚ğŠJ•ú");
-                    break;
-
-                case "Stage5":
-                    _stageButton[0].SetActive(true);
-                    _stageButton[1].SetActive(true);
-                    _stageButton[2].SetActive(true);
-                    _stageButton[3].SetActive(true);
-                    _stageButton[4].SetActive(true);
-                    Debug.Log("ƒXƒe[ƒW5‚Ü‚Å‚ğŠJ•ú");
-                    break;
+                _stageButton[i].SetActive(true);
+                Debug.Log("ã‚¹ãƒ†ãƒ¼ã‚¸" + i + 1 + "ã¾ã§ã‚’é–‹æ”¾");
             }
         }
     }
 
     public void ResetSaveData()
     {
-        _saveData._stageNumber = "Stage1";
-        Debug.Log("ƒŠƒZƒbƒg");
+        _saveData.StageNumber = 1;
+        Debug.Log("ãƒªã‚»ãƒƒãƒˆ");
     }
 }
