@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Onhold.Scene;
+using UniRx;
+using UniRx.Triggers;
+using System;
 public class CharacterMove : MonoBehaviour
 {
     [SerializeField] PlayerData _playerData;
@@ -256,8 +259,6 @@ public class CharacterMove : MonoBehaviour
             if(_playerData.Oxygen.Value >= 0)
             {
                 _playerData.OxygenDown();
-                
-
                 rb.gravityScale = _anoxiaGravityScale;
                 _jumpForce = _anoxiaJumpForce;
             }
@@ -268,7 +269,7 @@ public class CharacterMove : MonoBehaviour
         }
         else if (!_boolOxygun)
         {
-            if(_playerData.Oxygen.Value <= 100)
+            if (_playerData.Oxygen.Value <= 100)
             {
                 _playerData.OxygenUp();
                 rb.gravityScale = _defaultGravityScale;
