@@ -49,6 +49,9 @@ public class CharacterMove : MonoBehaviour
 
     [SerializeField]
     float _anoxiaJumpForce;
+
+    [SerializeField]
+    GameObject _fireGun;
     void Start()
     {
         GameManager.instance.ScoreReset();
@@ -103,10 +106,13 @@ public class CharacterMove : MonoBehaviour
     private void Move()
     {
         horizontalKey = Input.GetAxis("Horizontal");
-
         Vector2 moveVector = new Vector2(8,1000);
         //velocity = velocity - rb.velocity;
         //velocity = new Vector2(Mathf.Clamp(velocity.x, -_runSpeed, _runSpeed),Mathf.Clamp(velocity.y,-jumpspeed, jumpspeed));
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            FireGun();
+        }
         if (!wallJump)
         {
             //右入力で右向きに動く
@@ -116,6 +122,7 @@ public class CharacterMove : MonoBehaviour
                 rb.AddForce(Vector2.right *(moveVector - rb.velocity), ForceMode2D.Force);
                 _anim.SetBool("Rightrun", true);
                 _anim.SetBool("Leftrun", false);
+                _fireGun.transform.localPosition = Vector2.right; 
 
             }
             //左入力で左向きに動く
@@ -125,6 +132,8 @@ public class CharacterMove : MonoBehaviour
                 rb.AddForce(Vector2.left *(moveVector + rb.velocity), ForceMode2D.Force);
                 _anim.SetBool("Leftrun", true);
                 _anim.SetBool("Rightrun", false);
+                _fireGun.transform.localPosition = Vector2.left;
+
             }
             //ボタンを離すととまる
             else
@@ -246,6 +255,7 @@ public class CharacterMove : MonoBehaviour
                 
             }
         }
+
     }
 
     /// <summary>
@@ -278,7 +288,16 @@ public class CharacterMove : MonoBehaviour
         }
     }
 
-  
+    void FireGun()
+    {
+        if (_playerData._fireGun > 0 && _playerData.IsFireGun)
+        {
+            Debug.Log("雨後た");
+            _playerData.FireGunDown();
+            _fireGun.SetActive(true);
+            _playerData.FireGunOff();
+        }
+    }
 }
 
 

@@ -13,6 +13,12 @@ public class PlayerData : MonoBehaviour
 
     public IntReactiveProperty LIfe = new IntReactiveProperty(3);
 
+    public int _fireGun = 0;
+
+    public bool IsFireGun => isFireGun;
+
+    bool isFireGun = true;
+
     public void BatteryHeel()
     {
         if (Battery.Value <= 80)
@@ -48,5 +54,25 @@ public class PlayerData : MonoBehaviour
     public void HammerDown()
     {
         Hammer.Value --;
+    }
+
+    public void FireGunUP()
+    {
+        _fireGun++;
+    }
+
+    public void FireGunDown()
+    {
+        _fireGun--;
+    }
+
+    public void FireGunOn()
+    {
+        isFireGun = true;
+    }
+
+    public void FireGunOff()
+    {
+        isFireGun = false;
     }
 }
