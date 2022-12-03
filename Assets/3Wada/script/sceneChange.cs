@@ -1,7 +1,7 @@
 using UnityEngine.SceneManagement;
 using Onhold.Enums;
 
-namespace Onhold.SceneLoader
+namespace Onhold.Scene
 {
     public class SceneChange
     {
