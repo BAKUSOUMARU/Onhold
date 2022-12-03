@@ -1,4 +1,4 @@
-using UnityEditor;
+Ôªøusing UnityEditor;
 using UnityEngine;
 
 namespace ISDevTemplateEditor
@@ -6,25 +6,26 @@ namespace ISDevTemplateEditor
     [CustomEditor(typeof(JsonStageSelect))]
     public class SaveDataManagerEditor : Editor
     {
-        [SerializeField] int _stageNunber;
+        int _stageNunber;
+
         public override void OnInspectorGUI()
         {
             var maneger = target as JsonStageSelect;
-            EditorGUILayout.LabelField("ÉZÅ[Éuã@î\");
+            EditorGUILayout.LabelField("„Çª„Éº„ÉñÊ©üËÉΩ");
             DrawDefaultInspector();
 
             EditorGUILayout.Space(5f);
-            _stageNunber = EditorGUILayout.IntField("ï€ë∂ÇµÇΩÇ¢ÉXÉeÅ[ÉWêî", _stageNunber);
+            _stageNunber = EditorGUILayout.IntField("‰øùÂ≠ò„Åó„Åü„ÅÑ„Çπ„ÉÜ„Éº„Ç∏Êï∞", _stageNunber);
 
             EditorGUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("ÉZÅ[Éu"))
+            if (GUILayout.Button("„Çª„Éº„Éñ"))
             {
-                Debug.Log("ÉZÅ[Éu");
+                Debug.Log("„Çª„Éº„Éñ");
                 maneger.Save(_stageNunber);
             }
-            if (GUILayout.Button("ÉçÅ[Éh"))   maneger.Load();
-            if (GUILayout.Button("ÉäÉZÉbÉg")) maneger.ResetSaveData();
+            if (GUILayout.Button("„É≠„Éº„Éâ"))   maneger.Load();
+            if (GUILayout.Button("„É™„Çª„ÉÉ„Éà")) maneger.ResetSaveData();
 
             EditorGUILayout.EndHorizontal();
         }
