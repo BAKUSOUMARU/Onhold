@@ -4,7 +4,7 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
-    public int StageNumber;
+    public int StageNumber = 0;
 }
 
 public class JsonStageSelect : MonoBehaviour
@@ -22,12 +22,23 @@ public class JsonStageSelect : MonoBehaviour
     private GameObject[] _stageButton;
 
     void Awake()
-    {
+    {   
+        _filePath = Application.persistentDataPath + "/" + ".savedata.json";
+        if (!File.Exists(_filePath))
+        {
+            Debug.Log("ファイルが存在する");
+        }
+        else
+        {
+            new SaveData();
+            Debug.Log("ファイルが存在しないため作成");
+        }
+
         foreach (var chr in _stageButton)
         {
             chr.SetActive(false);
         }
-        _filePath = Application.persistentDataPath + "/" + ".savedata.json";
+        
         Load();
     }
 
