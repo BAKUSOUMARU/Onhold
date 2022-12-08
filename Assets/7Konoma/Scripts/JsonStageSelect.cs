@@ -7,7 +7,7 @@ public class SaveData
     public int StageNumber = 0;
 }
 
-public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
+public class JsonStageSelect :SingletonMonoBehaviour<JsonStageSelect>
 {
     [SerializeField]
     [Header("セーブデータ")]
@@ -21,18 +21,17 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
     [Header("ステージのボタン")]
     private GameObject[] _stageButton;
 
-     protected override void Awake()
+    void Start()
     {   
-        base.Awake();
-        _filePath = Application.persistentDataPath + "/" + ".savedata.json";
+        _filePath = Application.persistentDataPath + "/.savedata.json";
         if (!File.Exists(_filePath))
         {
-            Debug.Log("ファイルが存在する");
-        }
-        else
-        {
-            new SaveData();
-            Debug.Log("ファイルが存在しないため作成");
+            Debug.Log("ファイルが存在しない");
+            var json = JsonUtility.ToJson(_saveData);
+            StreamWriter streamWriter = new StreamWriter(_filePath);
+            streamWriter.Write(json); streamWriter.Flush();
+            streamWriter.Close();
+            _filePath = Application.persistentDataPath + "/.savedata.json";
         }
 
         foreach (var chr in _stageButton)
@@ -51,12 +50,9 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
     {
         if (!File.Exists(_filePath))
         {
-            _filePath = Application.persistentDataPath + "/" + ".savedata.json";
+            _filePath = Application.persistentDataPath + "/.savedata.json";
         }
-        else
-        {
-            new SaveData();
-        }
+
         _saveData.StageNumber = nowStageNumber;
 
         var json = JsonUtility.ToJson(_saveData);
