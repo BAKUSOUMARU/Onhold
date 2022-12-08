@@ -7,7 +7,7 @@ public class SaveData
     public int StageNumber;
 }
 
-public class JsonStageSelect : MonoBehaviour
+public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
 {
     [SerializeField]
     [Header("セーブデータ")]

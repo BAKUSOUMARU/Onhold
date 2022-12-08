@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void Init()
-    {
-        Debug.Log("Init");
-    }
-    private void Awake()
-    {
-        Debug.Log("Awake");
-    }
-    void Start()
+    public void Shutdown()
     {
         System.Diagnostics.Process ShutDownProc = new System.Diagnostics.Process();
         ShutDownProc.StartInfo.FileName = "shutdown.exe";

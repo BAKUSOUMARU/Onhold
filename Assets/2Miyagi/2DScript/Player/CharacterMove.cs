@@ -54,7 +54,7 @@ public class CharacterMove : MonoBehaviour
     GameObject _fireGun;
     void Start()
     {
-        GameManager.instance.ScoreReset();
+        GameManager.Instance.ScoreReset();
         this.rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _defaultJumpForce = _jumpForce;

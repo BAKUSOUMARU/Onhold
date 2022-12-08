@@ -10,11 +10,11 @@ public class SceneRoad : MonoBehaviour
     {
         switch (_sceneChange)
         {
-            case SceneChange.Next:
-                SceneManager.LoadScene(GameManager.instance.NextsceneName);
+            case SceneChange.Select:
+                SceneManager.LoadScene("GameSelect");
                 break;
             case SceneChange.retry:
-                SceneManager.LoadScene(GameManager.instance.retrysceneName);
+                SceneManager.LoadScene(GameManager.Instance.retrysceneName);
                 break;
 
         }
@@ -24,6 +24,6 @@ public class SceneRoad : MonoBehaviour
     enum SceneChange
     {
         retry,
-        Next
+        Select
     }
 }

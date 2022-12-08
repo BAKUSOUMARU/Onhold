@@ -2,31 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonMonoBehaviour<GameManager>
 {
+    public bool IsSelect => isSelect;
+
     int _score;
 
     public string retrysceneName = default;
 
     public string NextsceneName = default;
 
-    public static GameManager instance;
-    
+    bool isSelect = false;    
     public int Score => _score;
 
     int _reset = 0;
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
 
     public void ScoreUP(int score)
     {
@@ -36,5 +25,10 @@ public class GameManager : MonoBehaviour
     public void ScoreReset()
     {
         _score = _reset;
+    }
+
+    public void SelectOn()
+    {
+        isSelect = true;
     }
 }

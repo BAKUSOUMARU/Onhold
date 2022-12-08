@@ -10,7 +10,7 @@ public class ScoreItem : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
-            GameManager.instance.ScoreUP(_plusScore);
+            GameManager.Instance.ScoreUP(_plusScore);
         }
     }
 }
