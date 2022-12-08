@@ -21,12 +21,16 @@ public class JsonStageSelect : MonoBehaviour
     [Header("ステージのボタン")]
     private GameObject[] _stageButton;
 
+    [SerializeField]
+    string savedata;
+
     void Awake()
     {   
-        _filePath = Application.persistentDataPath + "/" + ".savedata.json";
+        _filePath = Application.persistentDataPath + "/.savedata.json";
         if (!File.Exists(_filePath))
         {
             Debug.Log("ファイルが存在する");
+            Debug.Log(_filePath);
         }
         else
         {
@@ -50,11 +54,12 @@ public class JsonStageSelect : MonoBehaviour
     {
         if (!File.Exists(_filePath))
         {
-            _filePath = Application.persistentDataPath + "/" + ".savedata.json";
+            _filePath = Application.persistentDataPath + "/.savedata.json";
         }
         else
         {
             new SaveData();
+            Debug.Log("作成");
         }
         _saveData.StageNumber = nowStageNumber;
 
