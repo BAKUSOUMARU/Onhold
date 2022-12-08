@@ -4,7 +4,7 @@ using UnityEngine;
 using Onhold.Scene;
 public class PlayeDestroy : MonoBehaviour
 {
-    [SerializeField]int _sceneIndex = 8;
+    [SerializeField] int _nowSceneNumber;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -17,6 +17,7 @@ public class PlayeDestroy : MonoBehaviour
 
     public void GameOver()
     {
-        SceneChange.NextScene(_sceneIndex);
+        GameManager.Instance.retrysceneName = "Stage" + _nowSceneNumber;
+        SceneChange.GameOverScene();
     }
 }
