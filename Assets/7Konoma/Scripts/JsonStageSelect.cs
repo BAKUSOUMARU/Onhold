@@ -21,8 +21,9 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
     [Header("ステージのボタン")]
     private GameObject[] _stageButton;
 
-    void Awake()
+     protected override void Awake()
     {   
+        base.Awake();
         _filePath = Application.persistentDataPath + "/" + ".savedata.json";
         if (!File.Exists(_filePath))
         {

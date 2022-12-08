@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class SceneRoad : MonoBehaviour
 {
     [SerializeField] SceneChange _sceneChange;
+
+    [SerializeField] int _stageIndex;
    public void  Sceneroad()
     {
         switch (_sceneChange)
@@ -16,7 +18,9 @@ public class SceneRoad : MonoBehaviour
             case SceneChange.retry:
                 SceneManager.LoadScene(GameManager.Instance.retrysceneName);
                 break;
-
+            case SceneChange.Stage:
+                SceneManager.LoadScene("Stage"+_stageIndex);
+                break;
         }
 
     }
@@ -24,6 +28,7 @@ public class SceneRoad : MonoBehaviour
     enum SceneChange
     {
         retry,
-        Select
+        Select,
+        Stage
     }
 }

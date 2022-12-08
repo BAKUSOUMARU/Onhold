@@ -10,8 +10,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public string retrysceneName = default;
 
-    public string NextsceneName = default;
-
     bool isSelect = false;    
     public int Score => _score;
 

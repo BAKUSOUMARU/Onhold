@@ -8,7 +8,7 @@ using System;
 public class CharacterMove : MonoBehaviour
 {
     [SerializeField] PlayerData _playerData;
-    private Rigidbody2D rb;
+    private Rigidbody2D rb = null;
 
     [SerializeField] 
     PoisonTrap _poisontrap;
@@ -54,10 +54,14 @@ public class CharacterMove : MonoBehaviour
     GameObject _fireGun;
     void Start()
     {
-        GameManager.Instance.ScoreReset();
-        this.rb = GetComponent<Rigidbody2D>();
+        this.rb = GetComponent<Rigidbody2D>();  
         _anim = GetComponent<Animator>();
         _defaultJumpForce = _jumpForce;
+        if (rb)
+        {
+            Debug.Log("‚ ‚é‚æ");
+        }
+        GameManager.Instance.ScoreReset();
     }
 
     private void Update()
@@ -274,7 +278,7 @@ public class CharacterMove : MonoBehaviour
             }
             else if (_playerData.Oxygen.Value <= 0)
             {
-                SceneChange.NextScene(8);
+                SceneChange.GameOverScene();
             }
         }
         else if (!_boolOxygun)

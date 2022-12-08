@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GoalFinished : MonoBehaviour
 {
-    int _nowStageNumber = default;
+    [SerializeField] int _nowStageNumber = default;
     private void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.tag == "Player"){
