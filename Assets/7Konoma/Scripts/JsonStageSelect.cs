@@ -4,7 +4,7 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
-    public int StageNumber;
+    public int StageNumber = 0;
 }
 
 public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
@@ -22,15 +22,30 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
     private GameObject[] _stageButton;
 
     void Awake()
-    {
-        foreach (GameObject chr in _stageButton)
+    {   
+        _filePath = Application.persistentDataPath + "/" + ".savedata.json";
+        if (!File.Exists(_filePath))
+        {
+            Debug.Log("ファイルが存在する");
+        }
+        else
+        {
+            new SaveData();
+            Debug.Log("ファイルが存在しないため作成");
+        }
+
+        foreach (var chr in _stageButton)
         {
             chr.SetActive(false);
         }
-        _filePath = Application.persistentDataPath + "/" + ".savedata.json";
+        
         Load();
     }
 
+    ///<summary>
+    ///ステージクリア時に呼ばれる
+    ///
+    ///<summary>
     public void Save(int nowStageNumber)
     {
         if (!File.Exists(_filePath))
@@ -43,18 +58,21 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
         }
         _saveData.StageNumber = nowStageNumber;
 
-        string json = JsonUtility.ToJson(_saveData);
+        var json = JsonUtility.ToJson(_saveData);
         StreamWriter streamWriter = new StreamWriter(_filePath);
         streamWriter.Write(json); streamWriter.Flush();
         streamWriter.Close();
     }
 
+    /// <summary>
+    ///ロード
+    ///シーンが読み込まれたときに呼ぶ
+ 　/// </summary>
     public void Load()
     {
         if (File.Exists(_filePath))
         {                
-            StreamReader streamReader;
-            streamReader = new StreamReader(_filePath);
+            var streamReader = new StreamReader(_filePath);
             string _data = streamReader.ReadToEnd();
             streamReader.Close();
 
@@ -63,14 +81,14 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
             for (int i = 0; i <= _saveData.StageNumber; i++)
             {
                 _stageButton[i].SetActive(true);
-                Debug.Log("ステージ" + i + 1 + "までを開放");
+                Debug.Log(i + 1 + "ステージを開放");
             }
         }
     }
 
     public void ResetSaveData()
     {
-        _saveData.StageNumber = 1;
+        _saveData.StageNumber = 0;
         Debug.Log("リセット");
     }
 }
