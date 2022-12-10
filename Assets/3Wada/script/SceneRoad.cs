@@ -8,6 +8,8 @@ public class SceneRoad : MonoBehaviour
     [SerializeField] SceneChange _sceneChange;
 
     [SerializeField] int _stageIndex;
+
+    [SerializeField] GameObject _stageCanvas;
    public void  Sceneroad()
     {
         switch (_sceneChange)
@@ -19,6 +21,7 @@ public class SceneRoad : MonoBehaviour
                 SceneManager.LoadScene(GameManager.Instance.retrysceneName);
                 break;
             case SceneChange.Stage:
+                _stageCanvas.SetActive(false);
                 SceneManager.LoadScene("Stage"+_stageIndex);
                 break;
         }

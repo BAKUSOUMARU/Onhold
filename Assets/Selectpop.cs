@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Selectpop : MonoBehaviour
+public class Selectpop : SingletonMonoBehaviour<Selectpop>
 {
     [SerializeField]
     GameObject _title;
@@ -10,18 +10,13 @@ public class Selectpop : MonoBehaviour
     [SerializeField]
     GameObject _select;
 
-    void Start()
-    {
+    public void test()
+    { 
         if (GameManager.Instance.IsSelect)
         {
             _title.SetActive(false);
             _select.SetActive(true);
+            JsonStageSelect.Instance.Load();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

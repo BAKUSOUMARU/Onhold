@@ -10,8 +10,8 @@ public class GoalFinished : MonoBehaviour
     {
         if(col.gameObject.tag == "Player"){
             Debug.Log("finish");
-            SceneManager.LoadScene("Gameclear");
             JsonStageSelect.Instance.Save(_nowStageNumber);
+            SceneManager.LoadScene("GameClear");
         }
     }
 }
