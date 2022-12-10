@@ -614,6 +614,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322255370}
   m_CullTransparentMesh: 1
+--- !u!114 &1428306077 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7404440885484436907, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+  m_PrefabInstance: {fileID: 4050801360184487591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dace1d65ef3d649883a7a1682ec98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1535946316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1036,34 @@ PrefabInstance:
       propertyPath: _stageCanvas
       value: 
       objectReference: {fileID: 4050801360184487592}
+    - target: {fileID: 7197993372267281595, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197993372267281595, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197993372267281595, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1428306077}
+    - target: {fileID: 7197993372267281595, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197993372267281595, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Sceneroad
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197993372267281595, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneRoad, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197993372267281595, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7404440885484436907, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
       propertyPath: _stageCanvas
       value: 
