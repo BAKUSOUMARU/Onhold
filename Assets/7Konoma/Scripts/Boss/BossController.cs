@@ -23,7 +23,7 @@ public class BossController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player2D")
+        if (gameObject.name == "Player2D")
         {
             if (_nowState == BossState.Nomal)
             {
@@ -32,13 +32,11 @@ public class BossController : MonoBehaviour
                     _hp--;
                     _nowState = BossState.Damage;
                     OnDamage();
-                    Debug.Log(_nowState);
                 }
                 else
                 {
                     _nowState = BossState.Hp0Rendition;
                     OnDamage();
-                    Debug.Log(_nowState);
                 }
             }
         }
