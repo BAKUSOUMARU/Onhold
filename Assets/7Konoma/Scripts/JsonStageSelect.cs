@@ -7,7 +7,7 @@ public class SaveData
     public int StageNumber = 0;
 }
 
-public class JsonStageSelect :SingletonMonoBehaviour<JsonStageSelect>
+public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
 {
     [SerializeField]
     [Header("セーブデータ")]
@@ -22,8 +22,76 @@ public class JsonStageSelect :SingletonMonoBehaviour<JsonStageSelect>
     private GameObject[] _stageButton;
 
     void Start()
-    {   
+    {
         _filePath = Application.persistentDataPath + "/.savedata.json";
+
+        GetFile();
+
+        foreach (var chr in _stageButton)
+        {
+            chr.SetActive(false);
+        }
+
+        Load();
+    }
+
+    ///<summary>
+    ///ステージクリア時に呼ばれる
+    ///<summary>
+    public void Save(int nowStageNumber)
+    {
+        GetFile();
+        _saveData.StageNumber = nowStageNumber;
+
+        var json = JsonUtility.ToJson(_saveData);
+        StreamWriter streamWriter = new StreamWriter(_filePath);
+        streamWriter.Write(json);
+        streamWriter.Flush();
+        streamWriter.Close();
+    }
+
+    /// <summary>
+    ///ロード
+    ///シーンが読み込まれたときに呼ぶ
+    　/// </summary>
+    public void Load()
+    {
+        GetFile();
+        var streamReader = new StreamReader(_filePath);
+        string _data = streamReader.ReadToEnd();
+        streamReader.Close();
+
+        _saveData = JsonUtility.FromJson<SaveData>(_data);
+
+        for (int i = 0; i <= _saveData.StageNumber; i++)
+        {
+            _stageButton[i].SetActive(true);
+            Debug.Log(i + 1 + "ステージを開放");
+        }
+    }
+
+    /// <summary>
+    /// セーブデータをリセットしたい場合に呼ぶ
+    /// </summary>
+    public void ResetSaveData()
+    {
+        _saveData.StageNumber = 0;
+
+        var json = JsonUtility.ToJson(_saveData);
+        StreamWriter streamWriter = new StreamWriter(_filePath);
+        streamWriter.Write(json);
+        streamWriter.Flush();
+        streamWriter.Close();
+
+        Debug.Log("リセット");
+    }
+
+
+    /// <summary>
+    /// ファイルの有無を確認する
+    /// </summary>
+    public void GetFile()
+    {
         if (!File.Exists(_filePath))
         {
             Debug.Log("ファイルが存在しない");
@@ -32,60 +100,7 @@ public class JsonStageSelect :SingletonMonoBehaviour<JsonStageSelect>
             streamWriter.Write(json); streamWriter.Flush();
             streamWriter.Close();
             _filePath = Application.persistentDataPath + "/.savedata.json";
+            return;
         }
-
-        foreach (var chr in _stageButton)
-        {
-            chr.SetActive(false);
-        }
-        
-        Load();
-    }
-
-    ///<summary>
-    ///ステージクリア時に呼ばれる
-    ///
-    ///<summary>
-    public void Save(int nowStageNumber)
-    {
-        if (!File.Exists(_filePath))
-        {
-            _filePath = Application.persistentDataPath + "/.savedata.json";
-        }
-
-        _saveData.StageNumber = nowStageNumber;
-
-        var json = JsonUtility.ToJson(_saveData);
-        StreamWriter streamWriter = new StreamWriter(_filePath);
-        streamWriter.Write(json); streamWriter.Flush();
-        streamWriter.Close();
-    }
-
-    /// <summary>
-    ///ロード
-    ///シーンが読み込まれたときに呼ぶ
- 　/// </summary>
-    public void Load()
-    {
-        if (File.Exists(_filePath))
-        {                
-            var streamReader = new StreamReader(_filePath);
-            string _data = streamReader.ReadToEnd();
-            streamReader.Close();
-
-            _saveData = JsonUtility.FromJson<SaveData>(_data);
-
-            for (int i = 0; i <= _saveData.StageNumber; i++)
-            {
-                _stageButton[i].SetActive(true);
-                Debug.Log(i + 1 + "ステージを開放");
-            }
-        }
-    }
-
-    public void ResetSaveData()
-    {
-        _saveData.StageNumber = 0;
-        Debug.Log("リセット");
     }
 }

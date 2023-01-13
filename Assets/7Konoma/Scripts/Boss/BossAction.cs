@@ -1,35 +1,56 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BossAction : MonoBehaviour
 {
-    float _attackTimer;
-    float _attackWait;
+    [SerializeField]
+    [Header("ジャンプの高さ")]
+    float _junpHeight;
 
-    BossPattern _action;
+    [SerializeField]
+    [Header("突進時間")]
+    int _lungesTime;
 
-    private void Awake()
+    [SerializeField]
+    [Header("ジャンプした回数")]
+    int _junpCount;
+
+    [SerializeField]
+    IceAttackPool _attackPool;
+
+    [SerializeField]
+    float _xPos;
+
+    [SerializeField]
+    Rigidbody2D _rb2;
+
+    [SerializeField]
+    Transform _tr;
+    public void IceAtack()
     {
-        _action = BossPattern.Stop;
-        IceAttack();
+        var IceAttack = _attackPool.GetIceAttack();
+        IceAttack.transform.position = gameObject.transform.position;
     }
 
-    private void FixedUpdate()
+    public void Update()
     {
-        if (_attackTimer > _attackWait)
-        {
-            //_action = ;          
-        }
+
     }
 
-    private void IceAttack()
+    public void Junp()
     {
-        var number = new System.Random();
-        for (int i = 0; i > 4; i++)
-        {
-            Debug.Log(number);
-        }
+        Debug.Log("ジャンプ");
+        _rb2.velocity = new Vector2(0, _junpHeight);
+        _junpCount++;
+    }
+
+    public void  Lunges()
+    {
+        _junpCount = 0;
+        _xPos = gameObject.transform.position.x -5;
+        _tr.DOMoveX(_xPos,_lungesTime);
+        Debug.Log(_xPos);
     }
 }
+
