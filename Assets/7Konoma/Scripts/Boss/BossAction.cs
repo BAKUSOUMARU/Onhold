@@ -20,8 +20,7 @@ public class BossAction : MonoBehaviour
     {
         if (_attackTimer > _attackWait)
         {
-           
-          
+            //_action = ;          
         }
     }
 
@@ -30,7 +29,6 @@ public class BossAction : MonoBehaviour
         var number = new System.Random();
         for (int i = 0; i > 4; i++)
         {
-            Console.WriteLine((BossPattern)number.Next(sizeof(BossPattern)));
             Debug.Log(number);
         }
     }
