@@ -5,17 +5,17 @@ using Onhold.Scene;
 using UniRx;
 using UniRx.Triggers;
 using System;
-public class CharacterMove : MonoBehaviour
+public class CharaMove : MonoBehaviour
 {
     [SerializeField] PlayerData _playerData;
     private Rigidbody2D rb = null;
 
-    [SerializeField] 
+    [SerializeField]
     PoisonTrap _poisontrap;
 
-    [SerializeField]GameObject _light;//lightのオブジェクト
+    [SerializeField] GameObject _light;//lightのオブジェクト
 
-    [SerializeField] private float jumpspeed =8f;
+    [SerializeField] private float jumpspeed = 8f;
     Animator _anim;
 
     [SerializeField]
@@ -30,7 +30,7 @@ public class CharacterMove : MonoBehaviour
     float _wallJumpCoolTime = 0.3f; //壁ジャンのクールタイム
 
     float horizontalKey;
-    
+
     bool isGround = true;           //地面と接しているか管理するフラグ
     bool isWall = false;            //壁に接しているかのフラグ
     bool wallJump = false;          //壁ジャン後の遅延用
@@ -54,7 +54,7 @@ public class CharacterMove : MonoBehaviour
     GameObject _fireGun;
     void Start()
     {
-        this.rb = GetComponent<Rigidbody2D>();  
+        this.rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _defaultJumpForce = _jumpForce;
         if (rb)
@@ -65,14 +65,14 @@ public class CharacterMove : MonoBehaviour
     }
 
     private void Update()
-    {    
+    {
         Move();
         WaterPlayer();
         LightMove();
     }
-    
-        
-    
+
+
+
 
     /// <summary>
     /// ライトを操作
@@ -110,7 +110,7 @@ public class CharacterMove : MonoBehaviour
     private void Move()
     {
         horizontalKey = Input.GetAxis("Horizontal");
-        Vector2 moveVector = new Vector2(8,1000);
+        Vector2 moveVector = new Vector2(8, 1000);
         //velocity = velocity - rb.velocity;
         //velocity = new Vector2(Mathf.Clamp(velocity.x, -_runSpeed, _runSpeed),Mathf.Clamp(velocity.y,-jumpspeed, jumpspeed));
         if (Input.GetKeyDown(KeyCode.E))
@@ -123,17 +123,17 @@ public class CharacterMove : MonoBehaviour
             if (horizontalKey > 0)
             {
                 //rb.velocity = new Vector2(_runSpeed, rb.velocity.y);
-                rb.AddForce(Vector2.right *(moveVector - rb.velocity), ForceMode2D.Force);
+                rb.AddForce(Vector2.right * (moveVector - rb.velocity), ForceMode2D.Force);
                 _anim.SetBool("Rightrun", true);
                 _anim.SetBool("Leftrun", false);
-                _fireGun.transform.localPosition = Vector2.right; 
+                _fireGun.transform.localPosition = Vector2.right;
 
             }
             //左入力で左向きに動く
             else if (horizontalKey < 0)
             {
                 //rb.velocity = new Vector2(-_runSpeed, rb.velocity.y);
-                rb.AddForce(Vector2.left *(moveVector + rb.velocity), ForceMode2D.Force);
+                rb.AddForce(Vector2.left * (moveVector + rb.velocity), ForceMode2D.Force);
                 _anim.SetBool("Leftrun", true);
                 _anim.SetBool("Rightrun", false);
                 _fireGun.transform.localPosition = Vector2.left;
@@ -142,7 +142,7 @@ public class CharacterMove : MonoBehaviour
             //ボタンを離すととまる
             else
             {
-                rb.velocity = new Vector2(0,rb.velocity.y);
+                rb.velocity = new Vector2(0, rb.velocity.y);
                 _anim.SetBool("Leftrun", false);
                 _anim.SetBool("Rightrun", false);
             }
@@ -153,7 +153,7 @@ public class CharacterMove : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
 
-                rb.AddForce(Vector2.up * (moveVector + rb.velocity), ForceMode2D.Force);     
+                rb.AddForce(Vector2.up * (moveVector + rb.velocity), ForceMode2D.Force);
                 isGround = false;
             }
         }
@@ -175,25 +175,26 @@ public class CharacterMove : MonoBehaviour
     private IEnumerator WallDelay(float delayFrameCount)
     {
         yield return new WaitForSecondsRealtime(delayFrameCount);
-        if(wallJump)wallJump = false;
+        if (wallJump) wallJump = false;
         if (isGround) isGround = false;
-        
+
     }//壁ジャンのディレイ
-        private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Enemy"){
+        if (col.gameObject.tag == "Enemy")
+        {
             Destroy(col.gameObject);
             this.rb.AddForce(transform.up * this._jumpForce);
         }
-        if(col.gameObject.tag == "Ground" || col.gameObject.tag == "DropGround")
+        if (col.gameObject.tag == "Ground" || col.gameObject.tag == "DropGround")
         {
             if (!isGround)
                 isGround = true;
         }
-        if(col.gameObject.tag == "Water")
+        if (col.gameObject.tag == "Water")
         {
             _boolOxygun = true;
-            
+
         }
         if (col.gameObject.tag == "Battery")
         {
@@ -209,12 +210,12 @@ public class CharacterMove : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground")
         {
             if (!isGround)
                 isGround = true;
         }
-        if(col.gameObject.tag == "Wall")
+        if (col.gameObject.tag == "Wall")
         {
             if (horizontalKey > 0 || horizontalKey < 0)
             {
@@ -222,23 +223,22 @@ public class CharacterMove : MonoBehaviour
                 {
                     isWall = true;
                 }
-                rb.AddForce(new Vector2(-rb.velocity.x, 5f)*10);
-                Coroutine coroutine = StartCoroutine("WallDelay", _wallJumpCoolTime);
+                rb.velocity = new Vector2(0, 0.5f);
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Wall")
+        if (col.gameObject.tag == "Wall")
         {
             if (isWall) { isWall = false; }
         }
-        if(col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground")
         {
-            if(isGround) { isGround = false; }
+            if (isGround) { isGround = false; }
         }
-        if(col.gameObject.tag == "Water")
+        if (col.gameObject.tag == "Water")
         {
             _boolOxygun = false;
             isGround = false;
@@ -257,7 +257,7 @@ public class CharacterMove : MonoBehaviour
             {
                 _playerData.HammerDown();
                 Destroy(collision.gameObject);
-                
+
             }
         }
 
@@ -271,7 +271,7 @@ public class CharacterMove : MonoBehaviour
         if (_boolOxygun)
         {
             isGround = true;
-            if(_playerData.Oxygen.Value >= 0)
+            if (_playerData.Oxygen.Value >= 0)
             {
                 _playerData.OxygenDown();
                 rb.gravityScale = _anoxiaGravityScale;
