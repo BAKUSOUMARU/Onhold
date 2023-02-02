@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
+using System.Text;
 
 [System.Serializable]
 public class SaveData
@@ -20,6 +21,9 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
     [SerializeField]
     [Header("ステージのボタン")]
     private GameObject[] _stageButton;
+
+    private static readonly string PasswordChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static readonly int PasswordCharsLength = PasswordChars.Length;
 
     void Start()
     {
@@ -44,6 +48,8 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
         _saveData.StageNumber = nowStageNumber;
 
         var json = JsonUtility.ToJson(_saveData);
+        FileStream fileStream = new FileStream(_filePath, FileMode.Create, FileAccess.Write);
+
         StreamWriter streamWriter = new StreamWriter(_filePath);
         streamWriter.Write(json);
         streamWriter.Flush();
@@ -86,11 +92,10 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
         Debug.Log("リセット");
     }
 
-
     /// <summary>
     /// ファイルの有無を確認する
     /// </summary>
-    public void GetFile()
+    void GetFile()
     {
         if (!File.Exists(_filePath))
         {
@@ -102,5 +107,16 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
             _filePath = Application.persistentDataPath + "/.savedata.json";
             return;
         }
+    }
+
+    public static string CreatePassword(int count)
+    {
+        StringBuilder sb = new StringBuilder(count);
+        for (int i = count - 1; i >= 0; i--)
+        {
+            char c = PasswordChars[UnityEngine.Random.Range(0, PasswordCharsLength)];
+            sb.Append(c);
+        }
+        return sb.ToString();
     }
 }

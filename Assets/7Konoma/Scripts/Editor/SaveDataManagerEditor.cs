@@ -1,31 +1,31 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace ISDevTemplateEditor
+namespace JsonSave
 {
     [CustomEditor(typeof(JsonStageSelect))]
     public class SaveDataManagerEditor : Editor
     {
-        int _stageNunber;
+        int _stageNumber; 
 
         public override void OnInspectorGUI()
         {
-            var maneger = target as JsonStageSelect;
+            var manager = target as JsonStageSelect;
             EditorGUILayout.LabelField("セーブ機能");
             DrawDefaultInspector();
 
             EditorGUILayout.Space(5f);
-            _stageNunber = EditorGUILayout.IntField("保存したいステージ数", _stageNunber);
+            _stageNumber = EditorGUILayout.IntField("保存したいステージ数", _stageNumber);
 
             EditorGUILayout.BeginHorizontal();
 
             if (GUILayout.Button("セーブ"))
             {
                 Debug.Log("セーブ");
-                maneger.Save(_stageNunber);
+                manager.Save(_stageNumber);
             }
-            if (GUILayout.Button("ロード"))   maneger.Load();
-            if (GUILayout.Button("リセット")) maneger.ResetSaveData();
+            if (GUILayout.Button("ロード"))   manager.Load();
+            if (GUILayout.Button("リセット")) manager.ResetSaveData();
 
             EditorGUILayout.EndHorizontal();
         }

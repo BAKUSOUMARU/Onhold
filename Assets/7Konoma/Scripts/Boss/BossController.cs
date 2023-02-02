@@ -39,7 +39,7 @@ public class BossController : MonoBehaviour
         {
             Debug.Log("PlayerDestroy");
             Destroy(collision.gameObject);
-            //_plyerDestroy.GameOver();
+            _plyerDestroy.GameOver();
         }
     }
 

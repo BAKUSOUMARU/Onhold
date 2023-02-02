@@ -13,44 +13,93 @@ public class BossAction : MonoBehaviour
     int _lungesTime;
 
     [SerializeField]
-    [Header("ジャンプした回数")]
+    [Header("ジャンプの回数")]
     int _junpCount;
 
     [SerializeField]
-    IceAttackPool _attackPool;
-
-    [SerializeField]
-    float _xPos;
-
-    [SerializeField]
+    [Header("ボスのRigidbody2D")]
     Rigidbody2D _rb2;
 
     [SerializeField]
+    [Header("ボスのtransform")]
     Transform _tr;
+
+    [SerializeField]
+    [Header("プレイヤーのtransform")]
+    Transform _playerTr;
+
+    [SerializeField]
+    [Header("ボスの移動スピード")]
+    float _speed;
+
+    [SerializeField]
+    [Header("行動の時間")]
+    float[] _count;
+
+
+    [SerializeField]
+    private IceAttackPool _attackPool;
+
+    [SerializeField]
+    private float _xPos;
+
+    private float _timer;
+    private void Start()
+    {
+       _tr = gameObject.GetComponent<Transform>();
+    }
+
+    private void Update()
+    {
+        float dis = Vector2.Distance(_tr.position, _playerTr.transform.position);
+
+        _timer++;
+        if(dis > 20)
+        {
+            if (_count[0] < _timer)
+            {
+                _timer = 0;
+                IceAtack();
+            }
+        }
+        else if (dis >10)
+        {
+            _tr.position = Vector2.MoveTowards(_tr.position, new Vector2(_playerTr.position.x, _tr.position.y), _speed);
+        }
+        else if (dis > 5)
+        {
+            if (_count[1] < _timer && _junpCount > 1)
+            {
+                _timer = 0;
+                _junpCount = 0;
+                Lunges();
+            }
+            else if(_count[1] < _timer )
+            {
+                _timer = 0;
+                _junpCount++;
+                Junp();
+            }
+        }
+    }
+
     public void IceAtack()
     {
         var IceAttack = _attackPool.GetIceAttack();
         IceAttack.transform.position = gameObject.transform.position;
     }
 
-    public void Update()
-    {
-
-    }
-
     public void Junp()
     {
         Debug.Log("ジャンプ");
         _rb2.velocity = new Vector2(0, _junpHeight);
-        _junpCount++;
     }
 
     public void  Lunges()
     {
-        _junpCount = 0;
-        _xPos = gameObject.transform.position.x -5;
+        if (_playerTr.position.x > _tr.position.x) _xPos = gameObject.transform.position.x + 5;
+        else if (_playerTr.position.x < _tr.position.x) _xPos = gameObject.transform.position.x - 5;
         _tr.DOMoveX(_xPos,_lungesTime);
-        Debug.Log(_xPos);
     }
 }
 
