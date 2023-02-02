@@ -16,7 +16,7 @@ public class BossStartAnimation : MonoBehaviour
     [Header("ボスのオブジェクト")]
     GameObject _Boss;
 
-    float _BossPos; 
+    float _BossPos;
 
     [SerializeField]
     [Header("カメラの移動時間")]
@@ -26,26 +26,22 @@ public class BossStartAnimation : MonoBehaviour
     [Header("ボスを映す時間")]
     int _stayTime;
 
+    [SerializeField]
     CinemachineBrain _brain;
-
-    void Awake()
-    {
-        _brain = _camera.GetComponent<CinemachineBrain>();
-    }
 
     /// <summary>
     /// ボスエリア内に始めて入った際に呼ばれる
     /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name=="Player2D")
+        if (collision.gameObject.name == "Player2D")
         {
             Debug.Log("ボスの範囲内に入った");
             _brain.enabled = false;
 
             _BossPos = _Boss.transform.position.x;
 
-            var ienumerator = MoveCamera();
+            IEnumerator ienumerator = MoveCamera();
             StartCoroutine(ienumerator);
         }
     }
@@ -57,6 +53,6 @@ public class BossStartAnimation : MonoBehaviour
 
         yield return new WaitForSeconds(_stayTime);
         _brain.enabled = true;
-        _ = GetComponent<Collider2D>().enabled =false;     
+        _ = GetComponent<Collider2D>().enabled = false;
     }
 }
