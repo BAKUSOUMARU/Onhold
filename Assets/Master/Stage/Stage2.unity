@@ -1386,6 +1386,10 @@ PrefabInstance:
       value: Player2D
       objectReference: {fileID: 0}
     - target: {fileID: 8297606051462243145, guid: 1356635e924cb1c4398edd9774add356, type: 3}
+      propertyPath: _runSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8297606051462243145, guid: 1356635e924cb1c4398edd9774add356, type: 3}
       propertyPath: _playerData
       value: 
       objectReference: {fileID: 1877077362}
@@ -1869,8 +1873,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d176b0ff2c0ef419f889e6e66d89cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  retrysceneName: Stage2
-  nextsceneName: Stage1
 --- !u!4 &1500708036
 Transform:
   m_ObjectHideFlags: 0

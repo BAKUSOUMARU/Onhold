@@ -1,19 +1,31 @@
+Ôªøusing System;
 using System.Collections;
+using UniRx;
 using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
     [SerializeField]
-    [Header("É{ÉXÇÃHP")]
+    [Header("„Éú„Çπ„ÅÆHP")]
     int _hp;
     
     [SerializeField]
-    [Header("ñ≥ìGéûä‘")]
+    [Header("ÁÑ°ÊïµÊôÇÈñì")]
     float _continueTime;
+
+    [SerializeField]
+    int _jumpForce;
+
+    [SerializeField]
+    Rigidbody2D _playerRb2d;
 
     BossState _nowState;
 
     SpriteRenderer _sprite;
+
+    Subject<string> attackSubject = new Subject<string>();
+
+    PlayeDestroy _plyerDestroy;
 
     private void Awake()
     {
@@ -21,46 +33,53 @@ public class BossController : MonoBehaviour
         _nowState = BossState.Nomal;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("PlayerDestroy");
+            Destroy(collision.gameObject);
+            _plyerDestroy.GameOver();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (gameObject.name == "Player2D")
+        if (other.gameObject.CompareTag("Player"))
         {
-            if (_nowState == BossState.Nomal)
+            _playerRb2d.velocity = new Vector2(0, _jumpForce);
+            Debug.Log("HIT");
+            if (_nowState == BossState.Nomal && _hp >= 0)
             {
-                if (_hp > 0)
-                {
-                    _hp--;
-                    _nowState = BossState.Damage;
-                    OnDamage();
-                }
-                else
-                {
-                    _nowState = BossState.Hp0Rendition;
-                    OnDamage();
-                }
+                _hp--;
+                _nowState = BossState.Damage;
+                OnDamage();
+            }
+            else if (_hp <= 0)
+            {
+                _nowState = BossState.Hp0Rendition;
+                BossHp0();
             }
         }
     }
 
     private void OnDamage()
-    {
-        switch (_nowState)
-        {
-            case BossState.Damage:
-                    StartCoroutine("Damgeoff");               
-                break;
+    {       
+        float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
+        _sprite.color = new Color(1f, 1f, 1f, level);
 
-            case BossState.Hp0Rendition:
-                gameObject.SetActive(false);
-                break;
-        }
+        Debug.Log("„ÉÄ„É°„Éº„Ç∏");
+
+        _ = StartCoroutine(nameof(Damgeoff));
+    }
+
+    private void BossHp0()
+    {
+        gameObject.SetActive(false);
     }
 
     IEnumerator Damgeoff()
     {
-        float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
-        _sprite.color = new Color(1f, 1f, 1f, level);
-
         yield return new WaitForSeconds(_continueTime);
         
         _sprite.color = new Color(1f, 1f, 1f, 1f);
