@@ -451,7 +451,7 @@ PrefabInstance:
     - target: {fileID: 5152923358235292085, guid: dedc3dfe8e2c94442b317397a14d6375, type: 3}
       propertyPath: _batteryView
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 965507064}
     - target: {fileID: 5152923358339157181, guid: dedc3dfe8e2c94442b317397a14d6375, type: 3}
       propertyPath: m_RootOrder
       value: 12
