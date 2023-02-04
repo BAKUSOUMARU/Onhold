@@ -25,7 +25,8 @@ public class BossController : MonoBehaviour
 
     Subject<string> attackSubject = new Subject<string>();
 
-    PlayeDestroy _plyerDestroy;
+    [SerializeField]
+    int _stageNumber;
 
     private void Awake()
     {
@@ -39,7 +40,7 @@ public class BossController : MonoBehaviour
         {
             Debug.Log("PlayerDestroy");
             Destroy(collision.gameObject);
-            _plyerDestroy.GameOver();
+            PlayreDestroy.GameOver(_stageNumber);
         }
     }
 
