@@ -48,7 +48,7 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
         _saveData.StageNumber = nowStageNumber;
 
         var json = JsonUtility.ToJson(_saveData);
-        FileStream fileStream = new FileStream(_filePath, FileMode.Create, FileAccess.Write);
+        //FileStream fileStream = new FileStream(_filePath, FileMode.Create, FileAccess.Write);
 
         StreamWriter streamWriter = new StreamWriter(_filePath);
         streamWriter.Write(json);
@@ -100,9 +100,11 @@ public class JsonStageSelect : SingletonMonoBehaviour<JsonStageSelect>
         if (!File.Exists(_filePath))
         {
             Debug.Log("ファイルが存在しない");
+            _saveData.StageNumber = 0;
             var json = JsonUtility.ToJson(_saveData);
             StreamWriter streamWriter = new StreamWriter(_filePath);
-            streamWriter.Write(json); streamWriter.Flush();
+            streamWriter.Write(json); 
+            streamWriter.Flush();
             streamWriter.Close();
             _filePath = Application.persistentDataPath + "/.savedata.json";
             return;

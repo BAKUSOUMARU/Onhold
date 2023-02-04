@@ -2,7 +2,7 @@
 using System.Collections;
 using UniRx;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class BossController : MonoBehaviour
 {
     [SerializeField]
@@ -25,12 +25,16 @@ public class BossController : MonoBehaviour
 
     Subject<string> attackSubject = new Subject<string>();
 
-    PlayeDestroy _plyerDestroy;
+    [SerializeField]
+    int _stageNumber;
 
+    [SerializeField]
+    Text _testText;
     private void Awake()
     {
         _sprite = GetComponent<SpriteRenderer>();
         _nowState = BossState.Nomal;
+        _testText.enabled =false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -39,7 +43,7 @@ public class BossController : MonoBehaviour
         {
             Debug.Log("PlayerDestroy");
             Destroy(collision.gameObject);
-            _plyerDestroy.GameOver();
+            PlayreDestroy.GameOver(_stageNumber);
         }
     }
 
@@ -76,6 +80,7 @@ public class BossController : MonoBehaviour
     private void BossHp0()
     {
         gameObject.SetActive(false);
+        _testText.enabled = true; 
     }
 
     IEnumerator Damgeoff()
