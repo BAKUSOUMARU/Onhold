@@ -524,6 +524,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1082471131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7293031319968446613, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+  m_PrefabInstance: {fileID: 4050801360184487591}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1082471136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082471131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dace1d65ef3d649883a7a1682ec98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneChange: 2
+  _stageIndex: 5
+  _stageCanvas: {fileID: 4050801360184487592}
 --- !u!1 &1307681898
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,6 +981,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 139055045, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: _filePath
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 139055045, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: _saveData.StageNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 139055045, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: _stageButton.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 139055045, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
       propertyPath: _stageButton.Array.data[0]
       value: 
       objectReference: {fileID: 1818394825}
@@ -980,6 +1012,10 @@ PrefabInstance:
       propertyPath: _stageButton.Array.data[4]
       value: 
       objectReference: {fileID: 1731335646}
+    - target: {fileID: 1379893670533656994, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1856003523150134213, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1032,10 +1068,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gamemanagers
       objectReference: {fileID: 0}
+    - target: {fileID: 4429477479639173597, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4891717662153754644, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
       propertyPath: _stageCanvas
       value: 
       objectReference: {fileID: 4050801360184487592}
+    - target: {fileID: 4923780289331076196, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6794573454467387667, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6794573454467387667, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6794573454467387667, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1082471136}
+    - target: {fileID: 6794573454467387667, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6794573454467387667, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Sceneroad
+      objectReference: {fileID: 0}
+    - target: {fileID: 6794573454467387667, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneRoad, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6794573454467387667, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7197993372267281595, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1068,6 +1140,14 @@ PrefabInstance:
       propertyPath: _stageCanvas
       value: 
       objectReference: {fileID: 4050801360184487592}
+    - target: {fileID: 8245758951782972993, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611663177096101321, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20f629e3853727b4a81e22ed8db85005, type: 3}
 --- !u!1 &4050801360184487592 stripped
