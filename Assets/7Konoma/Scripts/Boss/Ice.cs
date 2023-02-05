@@ -14,6 +14,7 @@ public class Ice : MonoBehaviour
     [SerializeField]
     [Header("•X‚Ì‘±ŠÔ")]
     int _timer;
+
     void Update()
     {
         transform.Translate(-_speed, 0, 0);

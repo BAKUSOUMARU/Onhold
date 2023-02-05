@@ -522,6 +522,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4777503742137813019, guid: 511b478251f6fa24e88f4e3403175622, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 4777503742137813022, guid: 511b478251f6fa24e88f4e3403175622, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -709,6 +713,10 @@ PrefabInstance:
     - target: {fileID: 3257461617371226217, guid: f9a6b5db4ba5d124c93164cf6adcb60a, type: 3}
       propertyPath: m_LocalScale.y
       value: 16.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257461617371226220, guid: f9a6b5db4ba5d124c93164cf6adcb60a, type: 3}
+      propertyPath: _nowSceneNumber
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3257461619263105376, guid: f9a6b5db4ba5d124c93164cf6adcb60a, type: 3}
       propertyPath: m_Name
@@ -1398,6 +1406,10 @@ PrefabInstance:
       propertyPath: _poisontrap
       value: 
       objectReference: {fileID: 1900601279}
+    - target: {fileID: 8297606051462243145, guid: 1356635e924cb1c4398edd9774add356, type: 3}
+      propertyPath: _stageNumber
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1356635e924cb1c4398edd9774add356, type: 3}
 --- !u!1001 &1012277835
@@ -2073,6 +2085,10 @@ PrefabInstance:
     - target: {fileID: 2919540798566453749, guid: a573c21692a149f4193a7575ccc02d15, type: 3}
       propertyPath: m_Name
       value: Square (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919540798566453749, guid: a573c21692a149f4193a7575ccc02d15, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a573c21692a149f4193a7575ccc02d15, type: 3}

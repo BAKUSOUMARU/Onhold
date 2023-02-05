@@ -52,6 +52,10 @@ public class CharacterMove : MonoBehaviour
 
     [SerializeField]
     GameObject _fireGun;
+
+    [SerializeField]
+    private int _stageNumber;
+
     void Start()
     {
         this.rb = GetComponent<Rigidbody2D>();  
@@ -279,7 +283,8 @@ public class CharacterMove : MonoBehaviour
             }
             else if (_playerData.Oxygen.Value <= 0)
             {
-                SceneChange.GameOverScene();
+                //SceneChange.GameOverScene();
+                PlayreDestroy.GameOver(_stageNumber);
             }
         }
         else if (!_boolOxygun)
