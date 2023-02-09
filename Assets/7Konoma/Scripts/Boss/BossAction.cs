@@ -49,7 +49,7 @@ public class BossAction : MonoBehaviour
        _tr = gameObject.GetComponent<Transform>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         float dis = Vector2.Distance(_tr.position, _playerTr.transform.position);
 
