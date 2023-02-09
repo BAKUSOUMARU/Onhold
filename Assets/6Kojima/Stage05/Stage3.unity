@@ -3305,6 +3305,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 436720549379943268, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
   m_PrefabInstance: {fileID: 681288485}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &581935818 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 436720549379943273, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+  m_PrefabInstance: {fileID: 681288485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &681288485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3393,9 +3398,25 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 436720549379943279, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: m_alpha
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943279, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: m_count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943279, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: EaseType
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943279, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
       propertyPath: _testText
       value: 
       objectReference: {fileID: 167745938}
+    - target: {fileID: 436720549379943279, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: m_duration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 436720549379943279, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
       propertyPath: _playerRb2d
       value: 
@@ -3404,6 +3425,14 @@ PrefabInstance:
       propertyPath: _continueTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943279, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: DurationSeconds
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943279, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: m_spriteRenderer
+      value: 
+      objectReference: {fileID: 581935818}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
 --- !u!50 &683992497 stripped
@@ -4212,6 +4241,7 @@ GameObject:
   - component: {fileID: 1952729060}
   - component: {fileID: 1952729059}
   - component: {fileID: 1952729058}
+  - component: {fileID: 1952729061}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4302,3 +4332,16 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1952729061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952729056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c6226c6c8ab624e99a4d98b5a4420b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_updateInterval: 0.5

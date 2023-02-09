@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 public class BossController : MonoBehaviour
 {
+
     [SerializeField]
     [Header("ボスのHP")]
     int _hp;
@@ -30,6 +32,8 @@ public class BossController : MonoBehaviour
 
     [SerializeField]
     Text _testText;
+
+    Sequence _sequence;
     private void Awake()
     {
         _sprite = GetComponent<SpriteRenderer>();
@@ -68,10 +72,14 @@ public class BossController : MonoBehaviour
     }
 
     private void OnDamage()
-    {       
-        float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
-        _sprite.color = new Color(1f, 1f, 1f, level);
-
+    {
+        var _sequence = DOTween.Sequence()
+            .Append(_sprite.DOFade(0, 0.3f))
+            .Append(_sprite.DOFade(1, 0.3f))
+            .Append(_sprite.DOFade(0, 0.3f))
+            .Append(_sprite.DOFade(1, 0.3f))
+            .Append(_sprite.DOFade(0, 0.3f))
+            .Append(_sprite.DOFade(1, 0.3f));
         Debug.Log("ダメージ");
 
         _ = StartCoroutine(nameof(Damgeoff));
@@ -86,8 +94,7 @@ public class BossController : MonoBehaviour
     IEnumerator Damgeoff()
     {
         yield return new WaitForSeconds(_continueTime);
-        
-        _sprite.color = new Color(1f, 1f, 1f, 1f);
+
         _nowState = BossState.Nomal;
         Debug.Log(_nowState);
     }

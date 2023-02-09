@@ -15,7 +15,7 @@ public class Ice : MonoBehaviour
     [Header("•X‚Ì‘±ŠÔ")]
     int _timer;
 
-    void Update()
+    void FixedUpdate()
     {
         transform.Translate(-_speed, 0, 0);
 
