@@ -3570,6 +3570,10 @@ PrefabInstance:
       propertyPath: _anoxiaGravityScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8297606051462243147, guid: 1356635e924cb1c4398edd9774add356, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1356635e924cb1c4398edd9774add356, type: 3}
 --- !u!1 &749956685
@@ -7072,6 +7076,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943274, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943275, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: m_Size.x
+      value: 4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943275, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: m_Size.y
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943275, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943275, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 436720549379943276, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
       propertyPath: _playerTr
       value: 
@@ -7080,6 +7104,10 @@ PrefabInstance:
       propertyPath: _attackPool
       value: 
       objectReference: {fileID: 311891620}
+    - target: {fileID: 436720549379943276, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: _count.Array.data[0]
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 436720549379943278, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -7124,6 +7152,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943279, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: _testText
+      value: 
+      objectReference: {fileID: 646887267}
     - target: {fileID: 436720549379943279, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
       propertyPath: _playerRb2d
       value: 

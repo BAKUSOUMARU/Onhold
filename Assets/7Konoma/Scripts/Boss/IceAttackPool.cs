@@ -46,6 +46,7 @@ public class IceAttackPool : MonoBehaviour
             if (!IceAttack.gameObject.activeSelf)
             {
                 IceAttack.transform.position = transform.position;
+                IceAttack.GetComponent<Rigidbody2D>().simulated = true;
                 IceAttack.SetActive(true);
                 return IceAttack;
             }

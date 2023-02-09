@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1dc512cc9e56f438629a2324ec73eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadSceneName: gameover
+  _nowSceneNumber: 0
 --- !u!1 &3220339941759540139
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,4 +413,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1dc512cc9e56f438629a2324ec73eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadSceneName: gameover
+  _nowSceneNumber: 0

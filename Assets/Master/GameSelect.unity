@@ -542,7 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneChange: 2
-  _stageIndex: 5
+  _stageIndex: 3
   _stageCanvas: {fileID: 4050801360184487592}
 --- !u!1 &1307681898
 GameObject:

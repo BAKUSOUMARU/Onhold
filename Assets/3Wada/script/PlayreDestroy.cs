@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Onhold.Scene;
-public class PlayreDestroy : SingletonMonoBehaviour<PlayreDestroy>
+public class PlayreDestroy : MonoBehaviour
 {
     [SerializeField] int _nowSceneNumber; 
     private void OnTriggerEnter2D(Collider2D collision)
