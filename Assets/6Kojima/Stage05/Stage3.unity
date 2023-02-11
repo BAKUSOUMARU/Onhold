@@ -3342,6 +3342,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 683992501}
     - target: {fileID: 436720549379943276, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
+      propertyPath: _junpCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 436720549379943276, guid: 133156512eac4164a9bc33a854b4dab4, type: 3}
       propertyPath: _attackPool
       value: 
       objectReference: {fileID: 1924883340}
